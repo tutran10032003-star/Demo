@@ -266,7 +266,53 @@
             #custom-minutes { min-width: 0; width: 100%; }
             .eco-mascot { width: 180px; height: 180px; }
         }
-        @media (max-width:700px) { .header-inner{display:block;padding:10px 12px}.nav-pills{max-width:100%;display:flex;overflow-x:auto;gap:6px;scrollbar-width:none}.nav-pills::-webkit-scrollbar{display:none}.nav-btn{flex:0 0 auto;min-width:max-content;padding:10px 12px;font-size:13px}main{padding-left:12px!important;padding-right:12px!important}.vintage-panel{padding:16px!important;min-width:0}input,select,textarea{max-width:100%;min-width:0}#dashboard-col-chart{max-width:100%;overflow:hidden} }
+        @media (max-width:700px) { .header-inner{display:block;padding:10px 12px}.nav-pills{max-width:100%;display:flex;overflow-x:auto;gap:6px;scrollbar-width:none}.nav-pills::-webkit-scrollbar{display:none}.nav-btn{flex:0 0 auto;min-width:max-content;padding:10px 12px;font-size:13px}main{padding-left:12px!important;padding-right:12px!important}.vintage-panel{padding:16px!important;min-width:0}input,select,textarea{max-width:100%;min-width:0}#dashboard-col-chart{max-width:100%;overflow:visible} } 
+        /* Dashboard sizing and phone layout */
+        .dashboard-energy-layout { align-items: stretch; }
+        .dashboard-total-bill-card { min-height: 0; }
+        .dashboard-bands-scroll { min-width: 0; }
+        @media (max-width: 700px) {
+            #tab-content-reports .grid.grid-cols-3 { gap: 6px; }
+            #tab-content-reports #subtab-btn-upload,
+            #tab-content-reports #subtab-btn-listing,
+            #tab-content-reports #subtab-btn-dashboard {
+                min-width: 0; min-height: 46px; padding: 8px 4px;
+                font-size: 10px; line-height: 1.25; overflow-wrap: anywhere;
+            }
+            #report-subtab-dashboard { gap: 14px; }
+            #report-subtab-dashboard > .grid:first-child { gap: 8px; }
+            #report-subtab-dashboard > .grid:nth-child(2) { gap: 6px; }
+            #report-subtab-dashboard > .grid:nth-child(2) > div { min-width: 0; padding: 9px 7px; }
+            #report-subtab-dashboard > .grid:nth-child(2) > div p:first-child { min-height: 25px; font-size: 9px; line-height: 1.2; }
+            #dash-stat-kwh, #dash-stat-bill, #dash-stat-savings { font-size: 13px; overflow-wrap: anywhere; }
+            #report-subtab-dashboard .vint-card { min-width: 0; }
+            #report-subtab-dashboard .vint-card.p-4 { padding: 10px; }
+            #report-subtab-dashboard .vint-card.p-5 { padding: 12px; }
+            #report-subtab-dashboard .dashboard-energy-layout { grid-template-columns: minmax(0,1fr); }
+            #report-subtab-dashboard .dashboard-total-bill-card { min-height: 104px; padding: 12px; }
+            #dashboard-total-bill-value { font-size: 2rem; margin-top: 6px; }
+            #report-subtab-dashboard .dashboard-bands-scroll { width: 100%; overflow: hidden; }
+            #report-subtab-dashboard .dashboard-bands-scroll table { width: 100%; min-width: 0; table-layout: fixed; }
+            #report-subtab-dashboard .dashboard-bands-scroll th,
+            #report-subtab-dashboard .dashboard-bands-scroll td { padding-left: 2px; padding-right: 2px; overflow-wrap: anywhere; font-size: 8px; }
+            #report-subtab-upload .bill-bands-table th,
+            #report-subtab-upload .bill-bands-table td { padding-left: 1px; padding-right: 1px; font-size: 8px; line-height: 1.15; overflow-wrap: anywhere; }
+            #report-subtab-upload .bill-bands-table input { width: 100%; min-width: 0; padding: 4px 1px; font-size: 9px; }
+            #report-subtab-dashboard #dash-trend-info { max-width: 44%; white-space: normal; text-align: center; line-height: 1.2; }
+            #report-subtab-dashboard #dashboard-col-chart { min-width: 0; width: 100%; height: 224px; }
+            #report-subtab-dashboard #dashboard-chart-scroll { max-width: 100%; overflow: hidden; }
+            #report-subtab-dashboard #dashboard-euro-axis,
+            #report-subtab-dashboard #dashboard-kwh-axis { font-size: 9px; }
+            #report-subtab-dashboard #dashboard-x-labels { width: 100% !important; min-width: 0; font-size: 10px; }
+        }
+        @media (max-width: 380px) {
+            #report-subtab-dashboard .grid.grid-cols-\[auto_minmax\(0\,1fr\)_auto\] { gap: 4px; }
+            #report-subtab-dashboard #dashboard-euro-axis,
+            #report-subtab-dashboard #dashboard-kwh-axis { font-size: 8px; }
+            #report-subtab-dashboard > .grid:nth-child(2) > div p:first-child { font-size: 8px; }
+            #dash-stat-kwh, #dash-stat-bill, #dash-stat-savings { font-size: 12px; }
+        }
+
     </style>
 </head>
 
@@ -538,7 +584,7 @@
                 <!-- SUB-TAB 1: UPLOAD & EDIT BILL -->
                 <div id="report-subtab-upload" class="space-y-4 vint-card p-4 bg-white">
                     <h3 class="font-bold text-sm text-[#5c4738]">📷 Upload & đọc hoá đơn điện</h3>
-                    <p class="text-[11px] text-[#7a6452]">Tải hai ảnh: tổng hoá đơn và biểu đồ phân bổ. OCR chỉ hỗ trợ đọc thử; hãy kiểm tra số liệu trước khi lưu.</p>
+                    <p class="text-[11px] text-[#7a6452]">Upload two images: the bill summary and the energy breakdown chart. OCR provides a draft only; check all values before saving.</p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div class="vint-card p-3 bg-[#fffaf4] space-y-2"><b class="text-xs">🧾 Ảnh A · Tổng hoá đơn</b>
                             <label class="block px-3 py-2 bg-[#8C735F] text-white rounded-xl text-xs text-center cursor-pointer">📸 Chụp / chọn ảnh<input type="file" id="bill-img-file" accept="image/*" capture="environment" class="hidden" onchange="previewUploadedBill(event,'total')"></label>
@@ -561,18 +607,19 @@
                         <label class="font-bold">Tổng điện năng (kWh)<input id="edit-bill-kwh" type="number" min="0" step="0.01" placeholder="Nhập theo bill" class="w-full px-3 py-2 rounded-xl border mt-1"></label>
                     </div>
                     <div class="pt-3 border-t space-y-3">
-                        <div><b class="text-xs">🍩 Energy Breakdown · Donut vẽ lại & bảng khung giờ</b><p class="text-[10px] text-[#7a6452] mt-1">Donut được dựng lại từ ảnh B mỗi tháng. Bảng Day / Peak / Night đọc từ hoá đơn trang chi tiết; nếu OCR sai thì sửa tay được.</p></div>
+                        <div><b class="text-xs">🍩 Biểu đồ phân bổ gốc & bảng khung giờ</b><p class="text-[10px] text-[#7a6452] mt-1"></p></div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
-                            <div class="rounded-xl border border-[#d8c7b0] bg-white p-3 text-center min-h-64 flex flex-col items-center justify-center">
-                                <div id="bill-donut-redrawn" class="w-full flex flex-col items-center justify-center"><p id="bill-donut-original-empty" class="text-[10px] text-[#7a6452] py-8">Donut vẽ lại sẽ hiển thị ở đây sau khi tải ảnh B.</p></div>
+                            <div class="rounded-xl border border-[#d8c7b0] bg-white p-5 text-center flex flex-col justify-center min-h-40">
+                                <p class="text-xs font-bold uppercase tracking-wider text-[#7a6452]">Total Energy (kWh)</p>
+                                <p id="bill-total-energy-readout" class="mt-3 text-4xl sm:text-5xl font-extrabold tabular-nums text-[#32455c]">—</p>
                             </div>
-                            <div class="min-w-0 overflow-x-auto">
-                                <table class="w-full text-[10px] tabular-nums text-right">
-                                    <thead><tr class="text-[#7a6452]"><th class="text-left font-bold">Khung giờ</th><th class="font-bold">kWh</th><th class="font-bold">€/kWh</th><th class="font-bold">€</th><th class="font-bold">% kWh</th><th class="font-bold">% tiền</th></tr></thead>
+                            <div class="min-w-0 overflow-hidden bill-bands-table-wrap">
+                                <table class="w-full table-fixed text-[10px] tabular-nums text-right bill-bands-table">
+                                    <thead><tr class="text-[#7a6452]"><th class="text-left font-bold">Band</th><th class="font-bold">kWh</th><th class="font-bold">€/kWh</th><th class="font-bold">€</th><th class="font-bold">kWh %</th><th class="font-bold">€ %</th></tr></thead>
                                     <tbody>
-                                        <tr class="border-t border-[#e3d6c6]"><td class="py-1 text-left font-bold">Day <span class="font-normal text-[#7a6452]">8am–11pm</span></td><td><input id="bb-kwh-day" type="number" min="0" step="any" oninput="updateBillBands()" class="w-14 px-1 py-1 rounded-lg border text-right"></td><td><input id="bb-price-day" type="number" min="0" step="any" value="0.3719" oninput="updateBillBands()" class="w-16 px-1 py-1 rounded-lg border text-right"></td><td id="bb-eur-day">–</td><td id="bb-pk-day">–</td><td id="bb-pe-day">–</td></tr>
-                                        <tr class="border-t border-[#e3d6c6]"><td class="py-1 text-left font-bold">Peak <span class="font-normal text-[#7a6452]">5–7pm</span></td><td><input id="bb-kwh-peak" type="number" min="0" step="any" oninput="updateBillBands()" class="w-14 px-1 py-1 rounded-lg border text-right"></td><td><input id="bb-price-peak" type="number" min="0" step="any" value="0.3968" oninput="updateBillBands()" class="w-16 px-1 py-1 rounded-lg border text-right"></td><td id="bb-eur-peak">–</td><td id="bb-pk-peak">–</td><td id="bb-pe-peak">–</td></tr>
-                                        <tr class="border-t border-[#e3d6c6]"><td class="py-1 text-left font-bold">Night <span class="font-normal text-[#7a6452]">11pm–8am</span></td><td><input id="bb-kwh-night" type="number" min="0" step="any" oninput="updateBillBands()" class="w-14 px-1 py-1 rounded-lg border text-right"></td><td><input id="bb-price-night" type="number" min="0" step="any" value="0.1954" oninput="updateBillBands()" class="w-16 px-1 py-1 rounded-lg border text-right"></td><td id="bb-eur-night">–</td><td id="bb-pk-night">–</td><td id="bb-pe-night">–</td></tr>
+                                        <tr class="border-t border-[#e3d6c6]"><td class="py-1 text-left font-bold">Day</td><td><input id="bb-kwh-day" type="number" min="0" step="any" oninput="updateBillBands()" class="w-14 px-1 py-1 rounded-lg border text-right"></td><td><input id="bb-price-day" type="number" min="0" step="any" value="0.3719" oninput="updateBillBands()" class="w-16 px-1 py-1 rounded-lg border text-right"></td><td id="bb-eur-day">–</td><td id="bb-pk-day">–</td><td id="bb-pe-day">–</td></tr>
+                                        <tr class="border-t border-[#e3d6c6]"><td class="py-1 text-left font-bold">Peak</td><td><input id="bb-kwh-peak" type="number" min="0" step="any" oninput="updateBillBands()" class="w-14 px-1 py-1 rounded-lg border text-right"></td><td><input id="bb-price-peak" type="number" min="0" step="any" value="0.3968" oninput="updateBillBands()" class="w-16 px-1 py-1 rounded-lg border text-right"></td><td id="bb-eur-peak">–</td><td id="bb-pk-peak">–</td><td id="bb-pe-peak">–</td></tr>
+                                        <tr class="border-t border-[#e3d6c6]"><td class="py-1 text-left font-bold">Night</td><td><input id="bb-kwh-night" type="number" min="0" step="any" oninput="updateBillBands()" class="w-14 px-1 py-1 rounded-lg border text-right"></td><td><input id="bb-price-night" type="number" min="0" step="any" value="0.1954" oninput="updateBillBands()" class="w-16 px-1 py-1 rounded-lg border text-right"></td><td id="bb-eur-night">–</td><td id="bb-pk-night">–</td><td id="bb-pe-night">–</td></tr>
                                         <tr class="border-t-2 border-[#5c4738] font-extrabold"><td class="py-1 text-left">Total</td><td id="bb-total-kwh">–</td><td></td><td id="bb-total-eur">–</td><td>100%</td><td>100%</td></tr>
                                     </tbody>
                                 </table>
@@ -581,7 +628,7 @@
                         </div>
                     </div>
                     <p id="upload-status-text" class="text-[11px] font-bold text-[#7a6452]">Chưa lưu hoá đơn.</p>
-                    <button type="button" onclick="saveEditedBill()" class="w-full py-3 bg-[#A8C7A0] text-white font-bold rounded-xl border text-xs">💾 Lưu hoá đơn & cập nhật Dashboard</button>
+                    <button type="button" id="save-bill-button" onclick="saveEditedBill()" class="w-full py-3 bg-[#A8C7A0] text-white font-bold rounded-xl border text-xs">💾 Lưu hoá đơn & cập nhật Dashboard</button>
                 </div>
 
                 <!-- SUB-TAB 2: LISTING HISTORY (DẠNG KHUNG THẺ NỐI TIẾP NHƯ TARIFF) -->
@@ -634,12 +681,14 @@
                             <p class="text-xs font-bold text-[#5c4738]">📈 Bill (€ - Columns) & kWh Usage (Lines)</p>
                             <span id="dash-trend-info" class="text-[10px] bg-[#f0e6d6] px-2.5 py-0.5 rounded-full font-bold text-[#5c4738]">Auto Average Calculated</span>
                         </div>
-                        <div class="grid grid-cols-[auto_minmax(0,1fr)_auto] gap-2 items-stretch">
+                        <div id="dashboard-chart-scroll" class="w-full overflow-hidden">
+                        <div class="grid grid-cols-[34px_minmax(0,1fr)_38px] gap-1 sm:gap-2 items-stretch min-w-0">
                             <div id="dashboard-euro-axis" class="flex flex-col justify-between text-[9px] font-bold text-[#9b6844] py-2 text-right" aria-hidden="true"></div>
-                            <div id="dashboard-col-chart" class="min-w-0 h-52 relative">
+                            <div id="dashboard-col-chart" class="min-w-0 h-64 relative">
                                 <!-- SVG combo chart: € bars + kWh line -->
                             </div>
-                            <div id="dashboard-kwh-axis" class="flex flex-col justify-between text-[9px] font-bold text-[#64849b] py-2 text-left" aria-hidden="true"></div>
+                            <div id="dashboard-kwh-axis" class="flex flex-col justify-between text-[10px] font-bold text-[#64849b] py-2 text-left" aria-label="Usage axis in kilowatt-hours"></div>
+                        </div>
                         </div>
                         <div id="dashboard-x-labels" class="flex justify-around text-[10px] font-bold text-[#7a6452] px-2"></div>
                         <div class="flex flex-wrap justify-center gap-x-5 gap-y-1 text-[10px] font-bold text-[#5c4738] pt-1">
@@ -650,16 +699,16 @@
 
 
                     <div class="vint-card p-5 bg-[#fffaf4] space-y-4">
-                        <p class="text-xs font-bold text-[#5c4738] text-center">🍩 Energy Distribution · biểu đồ gốc & khung giờ</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
-                            <div class="rounded-xl border border-[#d8c7b0] bg-white p-2 text-center">
-                                <div id="dashboard-donut-redraw" class="w-full min-h-64 flex items-center justify-center" aria-label="Redrawn monthly energy donut chart"><p class="text-[10px] text-[#7a6452] py-8">Chọn một tháng để xem biểu đồ donut.</p></div>
-                                <p id="dashboard-original-empty" class="text-[10px] text-[#7a6452] py-8">Chọn một tháng để xem biểu đồ gốc.</p>
+                        <p class="text-xs font-bold text-[#5c4738] text-center">🍩 Energy Distribution · Original Chart & Time Bands</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch dashboard-energy-layout">
+                            <div class="dashboard-total-bill-card rounded-xl border border-[#d8c7b0] bg-white p-3 min-h-0 h-full flex flex-col items-center justify-center text-center">
+                                <p id="dashboard-total-bill-label" class="text-xs font-bold uppercase tracking-wider text-[#7a6452]">Total Electricity Bill</p>
+                                <p id="dashboard-total-bill-value" class="mt-3 text-4xl sm:text-5xl font-extrabold tabular-nums text-[#32455c]">—</p>
                             </div>
-                            <div class="min-w-0 overflow-x-auto">
+                            <div class="min-w-0 overflow-hidden dashboard-bands-scroll">
                                 <p class="text-[10px] font-extrabold text-[#7a6452] uppercase tracking-wider text-center">Selected Usage: <span id="donut-center-val" class="text-[#32455c] tabular-nums">— kWh</span></p>
-                                <table class="w-full text-[10px] tabular-nums text-right mt-1">
-                                    <thead><tr class="text-[#7a6452]"><th class="text-left font-bold">Khung giờ</th><th class="font-bold">kWh</th><th class="font-bold">% kWh</th><th class="font-bold">€</th><th class="font-bold">% tiền</th></tr></thead>
+                                <table class="w-full table-fixed text-[9px] tabular-nums text-right mt-1">
+                                    <thead><tr class="text-[#7a6452]"><th class="text-left font-bold">Band</th><th class="font-bold">kWh</th><th class="font-bold">kWh %</th><th class="font-bold">€</th><th class="font-bold">€ %</th></tr></thead>
                                     <tbody id="dashboard-bands-body"></tbody>
                                 </table>
                             </div>
@@ -848,6 +897,7 @@
 
     <!-- OCR ENGINE -->
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://raw.githubusercontent.com/tutran10032003-star/Saving_Money/eco-buddy-upgrade/quiz-data.js"></script>
 
     <!-- JAVASCRIPT -->
     <script>
@@ -856,51 +906,8 @@
         let completedTasks = [false, false, false];
 
         // KHO 40 CÂU HỎI QUIZ (GIỚI HẠN 1 TUẦN 10 CÂU)
-        const ecoQuizPool = [
-            { q: "Which appliance consumes the most standby power in a typical home?", options: ["A. Microwave / TV", "B. LED Light bulb"], correct: 0, explain: "Correct! Microwaves and TVs draw continuous standby power." },
-            { q: "What is the cheapest time period for electricity under SST Saver+?", options: ["A. 17:00 - 19:00 (Peak)", "B. 23:00 - 08:00 (Night Saver)"], correct: 1, explain: "Correct! Night rate is €0.1954/kWh, much cheaper than day/peak rates." },
-            { q: "Which activity uses the most energy in household water heating?", options: ["A. Taking long showers", "B. Washing hands with cold water"], correct: 0, explain: "Correct! Heating water for long showers consumes massive energy." },
-            { q: "When is the worst time to run your washing machine or dishwasher?", options: ["A. Peak Hours (17:00 - 19:00)", "B. Night Saver Hours (after 23:00)"], correct: 0, explain: "Correct! Peak hours have the highest rate (€0.3968/kWh)." },
-            { q: "How much XP do you get when completing the Kitchen Safety Checklist?", options: ["A. +10 XP", "B. +30 XP"], correct: 1, explain: "Correct! You earn +30 XP for completing all 5 kitchen safety steps!" },
-            { q: "What color badge does Bé Mây show during Night Saver hours?", options: ["A. 🟢 Green Badge", "B. 🔴 Red Badge"], correct: 0, explain: "Correct! Green badge indicates Night Saver rate is active." },
-            { q: "Is it good practice to leave phone chargers plugged into the wall 24/7?", options: ["A. Yes, it uses zero power", "B. No, they draw a small idle current"], correct: 1, explain: "Correct! Unplugging idle chargers saves standby energy." },
-            { q: "What day of the week is waste collection scheduled in the calendar?", options: ["A. Tuesday", "B. Saturday"], correct: 0, explain: "Correct! Tuesdays are marked as waste collection days." },
-            { q: "What level does Bé Mây reach after passing 100 XP?", options: ["A. Level 1: Sprout", "B. Level 2: Green Sprout"], correct: 1, explain: "Correct! Reaching 100 XP upgrades Bé Mây to Level 2." },
-            { q: "Why should you cover pots with lids when cooking?", options: ["A. Food cooks faster and saves energy", "B. It makes the kitchen colder"], correct: 0, explain: "Correct! Lids trap heat so water boils faster with less energy." },
-            // Tuần 2
-            { q: "How much does Night Saver electricity cost approximately per kWh?", options: ["A. €0.1954/kWh", "B. €0.5000/kWh"], correct: 0, explain: "Correct! Night Saver is €0.1954/kWh." },
-            { q: "What is the peak hours rate window?", options: ["A. 17:00 - 19:00", "B. 12:00 - 14:00"], correct: 0, explain: "Correct! Peak hours are strictly between 17:00 and 19:00." },
-            { q: "Does LED lighting use significantly less energy than incandescent bulbs?", options: ["A. Yes, up to 80-90% less", "B. No, they use the same"], correct: 0, explain: "Correct! LEDs are highly energy efficient." },
-            { q: "What should you check right after cooking?", options: ["A. Cooker, hood, oven and lights", "B. The weather forecast"], correct: 0, explain: "Correct! Kitchen safety checklist includes cooker, hood, oven, lights and wipe." },
-            { q: "How many daily eco tasks are available in the app?", options: ["A. 3 tasks", "B. 10 tasks"], correct: 0, explain: "Correct! There are 3 daily eco tasks." },
-            { q: "What is the main mascot of this app called?", options: ["A. Bé Mây (Eco Buddy)", "B. Robo Spark"], correct: 0, explain: "Correct! Bé Mây is your friendly companion." },
-            { q: "Is keeping your refrigerator door open too long energy-efficient?", options: ["A. No, it lets cold air escape", "B. Yes, it cools the kitchen"], correct: 0, explain: "Correct! Keeping fridge doors closed saves compressor energy." },
-            { q: "Where is the electricity tariff benchmarked in this app?", options: ["A. Dublin, Ireland (SST Saver+)", "B. Tokyo, Japan"], correct: 0, explain: "Correct! Configured for Dublin, Ireland." },
-            { q: "Can you store your XP and Eco Points across page reloads?", options: ["A. Yes, via localStorage", "B. No, it resets every time"], correct: 0, explain: "Correct! localStorage safely keeps your score." },
-            { q: "What is the reward for completing the 5-step Kitchen Safety check?", options: ["A. +30 XP", "B. +5 XP"], correct: 0, explain: "Correct! You get +30 XP." },
-            // Tuần 3
-            { q: "Which room in a typical apartment consumes the most lighting energy if left on?", options: ["A. Living room & Kitchen", "B. Balcony"], correct: 0, explain: "Correct! Living room and kitchen have multiple active fixtures." },
-            { q: "What is phantom load?", options: ["A. Energy consumed by appliances in standby mode", "B. Power outage"], correct: 0, explain: "Correct! Standby power is phantom load." },
-            { q: "Does washing clothes at 30°C save more energy than 60°C?", options: ["A. Yes, significantly less water heating required", "B. No, identical energy"], correct: 0, explain: "Correct! Lower temperature saves most of the washing machine's energy." },
-            { q: "How can you optimize refrigerator temperature?", options: ["A. Keep it at 3-5°C and freezer at -18°C", "B. Max cooling 24/7"], correct: 0, explain: "Correct! Recommended temperatures prevent overworking the compressor." },
-            { q: "Is natural ventilation better than running AC during mild weather?", options: ["A. Yes, saves 100% cooling energy", "B. No"], correct: 0, explain: "Correct! Natural ventilation is eco-friendly." },
-            { q: "What is the benefit of full loads in dishwashers?", options: ["A. Maximizes water and energy efficiency per dish", "B. None"], correct: 0, explain: "Correct! Running full loads prevents wasting cycles." },
-            { q: "Why unplug hair dryers or straighteners after use?", options: ["A. Safety and standby elimination", "B. To keep them cold"], correct: 0, explain: "Correct! Heat appliances draw power and pose fire risks." },
-            { q: "How often should waste collection be checked in the app calendar?", options: ["A. Every Tuesday", "B. Once a year"], correct: 0, explain: "Correct! Tuesdays are collection days." },
-            { q: "What happens when you reach 250 XP?", options: ["A. Unlock Level 3: Eco Master 🌿", "B. Reset score"], correct: 0, explain: "Correct! Level 3 is Eco Master." },
-            { q: "How many flashcard tips are displayed per week in the Tips tab?", options: ["A. 3 curated tips", "B. 50 tips"], correct: 0, explain: "Correct! Exactly 3 rotating tips per week." },
-            // Tuần 4
-            { q: "What is the best way to defrost frozen food?", options: ["A. Move it to the fridge in advance", "B. Use boiling water"], correct: 0, explain: "Correct! Fridge defrosting uses zero electricity." },
-            { q: "Does closing doors to unused rooms help heating/cooling efficiency?", options: ["A. Yes, zones the conditioned air", "B. No effect"], correct: 0, explain: "Correct! Zoning rooms saves HVAC energy." },
-            { q: "What is the main goal of Eco-Buddy Home Manager V2?", options: ["A. Track tariffs, habits, and save household energy", "B. Play arcade games"], correct: 0, explain: "Correct! Designed for home energy management." },
-            { q: "Are LED bulbs recyclable?", options: ["A. Yes, at specialized e-waste recycling points", "B. No, throw in regular trash"], correct: 0, explain: "Correct! E-waste recycling handles LEDs." },
-            { q: "What is the purpose of the 5-step kitchen safety check?", options: ["A. Prevent fire hazards and save electricity after cooking", "B. Clean windows"], correct: 0, explain: "Correct! Safety first." },
-            { q: "How many Eco Points do you get for rating a tip?", options: ["A. +10 Eco Points", "B. 0 points"], correct: 0, explain: "Correct! +10 Points." },
-            { q: "Can you customize the cooking timer?", options: ["A. Yes, select presets or enter custom minutes", "B. No"], correct: 0, explain: "Correct! Fully customizable." },
-            { q: "Is daylight harvesting (using natural sunlight) effective?", options: ["A. Yes, reduces artificial lighting needs", "B. No"], correct: 0, explain: "Correct! Natural light is free and clean." },
-            { q: "What color is the Night Saver badge in the app?", options: ["A. Green 🟢", "B. Red 🔴"], correct: 0, explain: "Correct! Green." },
-            { q: "How do you level up Bé Mây?", options: ["A. Complete daily tasks, quizzes and safety checks", "B. Do nothing"], correct: 0, explain: "Correct! Earn XP to level up." }
-        ];
+        const ecoQuizPool = window.ecoQuizPool || [];
+
 
         const weeklyTipsPool = [
             [
@@ -1151,13 +1158,10 @@
             if(p){p.src=billImageUrls[type];p.classList.remove("hidden");}
             if(type==="breakdown"){
                 window.currentBillDonutSegments=null;
-                const host=_bbEl("bill-donut-redrawn");
-                if(host){host.innerHTML='<p class="text-[10px] text-[#7a6452] text-center py-8">Đang nhận diện donut…</p>';
-                    detectDonutSegments(file).then(detected=>{
-                        if(detected.ok){window.currentBillDonutSegments=detected.segments;renderRebuiltDonut(host,detected.segments,"");}
-                        else host.innerHTML='<p class="text-[10px] text-[#9b6655] text-center py-8">Chưa nhận diện được donut rõ ràng. Thử ảnh rõ hơn nhé.</p>';
-                    }).catch(error=>console.warn("Donut preview failed",error));
-                }
+                detectDonutSegments(file).then(detected=>{
+                    if(detected.ok)window.currentBillDonutSegments=detected.segments;
+                    else console.warn("Image B energy distribution recognition:",detected.reason||"not detected");
+                }).catch(error=>console.warn("Image B reading failed",error));
             }
             document.getElementById("upload-status-text").textContent="Ảnh đã sẵn sàng. Bấm đọc OCR hoặc nhập tay rồi lưu.";document.getElementById("bill-ocr-status").textContent="Có ảnh mới — cần đọc lại";if(type==="breakdown"){showBillDonutOriginal();document.querySelectorAll("[data-category-percent]").forEach(input=>input.value="");updateBillCategoryTotals();}
         }
@@ -1183,8 +1187,10 @@
             }
             const moneyMatches=[...text.matchAll(/(?:€\s*|EUR\s*)(\d{1,5}(?:[,.]\d{2})?)/gi),...text.matchAll(/(?:total\s*(?:amount|due|bill)|amount\s*due)\s*[:：]?\s*€?\s*(\d{1,5}(?:[,.]\d{2})?)/gi)];
             if(moneyMatches.length){const vals=moneyMatches.map(m=>Number(m[1].replace(",","."))).filter(Number.isFinite);if(vals.length)r.amount=vals[vals.length-1];}
+            const usageUnitMatch=text.match(/usage\s*unit\s*[:：]?\s*(\d{1,6}(?:[,.]\d{1,2})?)/i);
             const kwhMatch=text.match(/(?:total\s*(?:consumption|usage|electricity|energy)?\s*[:：]?\s*)(\d{1,6}(?:[,.]\d{1,2})?)\s*kwh\b|(\d{1,6}(?:[,.]\d{1,2})?)\s*kwh\b/i);
-            if(kwhMatch)r.kwh=Number((kwhMatch[1]||kwhMatch[2]).replace(",","."));
+            const kwhValue=usageUnitMatch&&usageUnitMatch[1]?usageUnitMatch[1]:(kwhMatch&&(kwhMatch[1]||kwhMatch[2]));
+            if(kwhValue)r.kwh=Number(kwhValue.replace(",","."));
             const issueMatch=text.match(/date\s*of\s*issue\s*[:：]?\s*(\d{1,2}\s+[A-Za-z]{3,9}\.?,?\s+(?:20\d{2}|\d{2})|\d{1,2}[\/.-]\d{1,2}[\/.-](?:20\d{2}|\d{2}))/i);
             if(issueMatch){const issue=parseBillDateParts(issueMatch[1])[0];if(issue){r.issueDate=issue.iso;if(!r.start&&!r.end){r.month=new Date(issue.iso+"T12:00:00").toLocaleString("en",{month:"long"});r.year=issue.year;}}}
             const periodAnchor=r.start||r.end;if(periodAnchor){const d=new Date(periodAnchor+"T12:00:00");r.month=d.toLocaleString("en",{month:"long"});r.year=d.getFullYear();}
@@ -1347,9 +1353,11 @@
                 set("bb-pe-"+r.key,r.eur!==null&&te>0?(r.eur/te*100).toFixed(1)+"%":"–");
             });
             const t1=_bbEl("bb-total-kwh"),t2=_bbEl("bb-total-eur"),warning=_bbEl("bb-warning"),totalInput=_bbEl("edit-bill-kwh");
+            const saveButton=_bbEl("save-bill-button");
+            if(saveButton){saveButton.disabled=false;saveButton.classList.remove("opacity-50","cursor-not-allowed");}
             if(t1)t1.textContent=tk>0?tk.toFixed(0):"–";
             if(t2)t2.textContent=te>0?"€"+te.toFixed(2):"–";
-            if(warning){const total=totalInput&&totalInput.value!==""?Number(totalInput.value):null;warning.textContent=tk>0&&total!==null&&Math.abs(tk-total)>1?"Tổng 3 khung giờ ("+tk.toFixed(0)+" kWh) khác tổng kWh đã nhập ("+total+" kWh) — hãy kiểm tra lại.":"";}
+            if(warning){const total=totalInput&&totalInput.value!==""?Number(totalInput.value):null,complete=rows.every(r=>r.kwh!==null&&Number.isFinite(r.kwh)&&r.kwh>=0);warning.textContent=complete&&tk>0&&total!==null&&Math.abs(tk-total)>1?"Tổng 3 khung giờ ("+tk.toFixed(0)+" kWh) khác tổng kWh đã nhập ("+total+" kWh) — hãy kiểm tra lại.":"";}
         }
         function showBillDonutOriginal(){
             const img=_bbEl("bill-donut-original"),empty=_bbEl("bill-donut-original-empty");if(!img)return;
@@ -1358,20 +1366,16 @@
         }
         function parseBillBands(text){
             const out={};
-            const toNumber=t=>Number(String(t).replace(/,/g,"").replace(/[Oo](?=\\d)/g,"0").replace(/[Il|](?=\\d)/g,"1").replace(",","."));
-            String(text||"").split(/\\n/).forEach(line=>{
+            String(text||"").split(/\n/).forEach(line=>{
                 if(/standing|levy|charge/i.test(line))return;
-                const match=line.match(/\\b(day|peak|night)\\b/i);if(!match)return;
-                const key=match[1].toLowerCase();if(out[key])return;
-                // Strip time ranges before extracting numbers, so 8am/11pm never become kWh.
-                const clean=line.replace(/\\b\\d{1,2}\\s*(?:am|pm)\\b\\s*(?:[-–—to]+\\s*\\d{1,2}\\s*(?:am|pm)\\b)?/gi," ")
-                    .replace(/\\b\\d{1,2}\\s*[:.]\\s*\\d{2}\\b/g," ");
-                const tokens=(clean.match(/[\\dOoIl|]+(?:[.,]\\d+)?/g)||[]).map(t=>t.replace(/[Oo](?=\\d)/g,"0").replace(/[Il|](?=\\d)/g,"1"));
-                const pi=tokens.findIndex(t=>/^0[.,]\\d{4}$/.test(t));if(pi<1)return;
-                const kwhToken=[...tokens.slice(0,pi)].reverse().find(t=>/^\\d{2,5}(?:[.,]\\d{1,2})?$/.test(t));if(!kwhToken)return;
-                const amountToken=tokens.slice(pi+1).find(t=>/^\\d{1,5}[.,]\\d{2}$/.test(t));
-                const kwh=toNumber(kwhToken),price=toNumber(tokens[pi]),amount=amountToken?toNumber(amountToken):null;
-                if(Number.isFinite(kwh)&&Number.isFinite(price))out[key]={kwh,price,amount};
+                const m=line.match(/\b(day|peak|night)\b/i);if(!m)return;
+                if(!/\d{1,2}\s*[:.]?\s*\d{0,2}\s*[ap]m/i.test(line))return;
+                const key=m[1].toLowerCase();if(out[key])return;
+                const nums=line.replace(/\([^)]*\)?/g," ").match(/\d+(?:[.,]\d+)?/g)||[];
+                const pi=nums.findIndex(t=>/^0[.,]\d{4}$/.test(t));if(pi<1)return;
+                const num=t=>Number(String(t).replace(",","."));
+                const amount=nums.slice(pi+1).filter(t=>/^\d{1,4}[.,]\d{2}$/.test(t)).pop();
+                out[key]={kwh:num(nums[pi-1]),price:num(nums[pi]),amount:amount?num(amount):null};
             });
             return out;
         }
@@ -1439,13 +1443,19 @@
                 }
                 window.currentBillDonutSegments=null;
                 if(breakdownResult){
-                    const detected=await detectDonutSegments(breakdownResult.file),host=_bbEl("bill-donut-redrawn");
-                    if(detected.ok){window.currentBillDonutSegments=detected.segments;if(host)renderRebuiltDonut(host,detected.segments,"");}
-                    else if(host)host.innerHTML='<p class="text-[10px] text-[#9b6655] text-center">Chưa nhận diện được vòng donut rõ ràng. Hãy thử ảnh rõ hơn hoặc lưu ảnh gốc.</p>';
+                    const detected=await detectDonutSegments(breakdownResult.file);
+                    if(detected.ok)window.currentBillDonutSegments=detected.segments;
+                    else console.warn("Image B distribution reading:",detected.reason||"not detected");
                 }
                 const parsed=parseBillOcrText(raw);
+                const imageBParsed=breakdownResult?parseBillOcrText(breakdownResult.text):{};
+                const imageAParsed=totalResult?parseBillOcrText(totalResult.text):{};
+                const totalEnergyKwh=imageBParsed.kwh!==undefined?imageBParsed.kwh:(imageAParsed.kwh!==undefined?imageAParsed.kwh:parsed.kwh);
                 if(parsed.amount!==undefined)_bbEl("edit-bill-amount").value=parsed.amount.toFixed(2);
-                if(parsed.kwh!==undefined)_bbEl("edit-bill-kwh").value=parsed.kwh;
+                if(totalEnergyKwh!==undefined){
+                    _bbEl("edit-bill-kwh").value=totalEnergyKwh;
+                    const readout=_bbEl("bill-total-energy-readout");if(readout)readout.textContent=Number(totalEnergyKwh).toLocaleString();
+                }
                 if(parsed.start)_bbEl("edit-bill-start").value=parsed.start;
                 if(parsed.end)_bbEl("edit-bill-end").value=parsed.end;
                 if(parsed.month)_bbEl("edit-bill-month").value=parsed.month;else if(parsed.start){const d=new Date(parsed.start+"T12:00:00");_bbEl("edit-bill-month").value=d.toLocaleString("en",{month:"long"});if(!parsed.year)_bbEl("edit-bill-year").value=d.getFullYear();}
@@ -1468,6 +1478,9 @@
         }
         async function saveEditedBill(){
             const month=document.getElementById("edit-bill-month").value.trim(),year=Number(document.getElementById("edit-bill-year").value),amount=Number(document.getElementById("edit-bill-amount").value),kwh=Number(document.getElementById("edit-bill-kwh").value),start=document.getElementById("edit-bill-start").value,end=document.getElementById("edit-bill-end").value;
+            const bandRows=readBillBands();
+            const suppliedBands=bandRows.filter(r=>r.kwh!==null&&Number.isFinite(r.kwh)&&r.kwh>=0);
+            const bandsComplete=suppliedBands.length===3;
             if(!month||!Number.isInteger(year)||year<2000||year>2100||document.getElementById("edit-bill-amount").value===""||!Number.isFinite(amount)||amount<0||document.getElementById("edit-bill-kwh").value===""||!Number.isFinite(kwh)||kwh<0){alert("Nhập tháng, năm, tổng tiền và tổng kWh hợp lệ trước khi lưu nhé.");return;}
             if(start&&end&&start>end){alert("Ngày bắt đầu không thể sau ngày kết thúc.");return;}
             const categories=[...document.querySelectorAll("[data-category-percent]")].map(x=>({key:x.dataset.categoryPercent,label:(document.querySelector('[data-category-label="'+x.dataset.categoryPercent+'"]')||{}).value||"",percent:x.value===""?null:Number(x.value)}));
@@ -1475,8 +1488,31 @@
             const populated=categories.filter(c=>c.percent!==null),sum=populated.reduce((n,c)=>n+c.percent,0);
             if(populated.length&&Math.abs(sum-100)>.11){alert("Nếu đã nhập EST, tổng tỷ lệ cần bằng 100%. Nếu chưa EST được, cứ để trống và lưu ảnh gốc.");return;}
             let imageData="";if(billImageFiles.breakdown){try{const bitmap=await createImageBitmap(billImageFiles.breakdown),scale=Math.min(1,1200/Math.max(bitmap.width,bitmap.height)),canvas=document.createElement("canvas");canvas.width=Math.round(bitmap.width*scale);canvas.height=Math.round(bitmap.height*scale);canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();imageData=canvas.toDataURL("image/jpeg",.9);}catch(e){console.warn("Could not compress original donut image",e);}}
-            const id=month.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")+"-"+year,old=billingRecords.find(x=>x.id===id),bands=readBillBands().filter(b=>b.kwh!==null),record={id,month,year,bill:amount,kwh,startDate:start,endDate:end,categories:populated.length?categories.filter(c=>c.percent!==null):[],donutSegments:billImageFiles.breakdown?(window.currentBillDonutSegments||[]):(old?.donutSegments||[]),bands:bands.length?bands:(old?.bands||[]),breakdownImageDataUrl:imageData||old?.breakdownImageDataUrl||"",savings:"€"+(kwh*.08).toFixed(2)+" cr"};
-            const idx=billingRecords.findIndex(x=>x.id===id);if(idx>=0)billingRecords[idx]={...billingRecords[idx],...record};else billingRecords.push(record);
+            const id=month.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")+"-"+year;
+            const old=billingRecords.find(x=>x.id===id || (start&&end&&x.startDate===start&&x.endDate===end));
+            const isVi=localStorage.getItem("eco_buddy_language")==="vi";
+            if(!bandsComplete){
+                const missingPrompt=isVi
+                    ? "Thiếu dữ liệu Day / Peak / Night. Vẫn lưu chứ? Các khung thiếu sẽ để trống."
+                    : "Day / Peak / Night data is missing. Save anyway? Missing values will stay blank.";
+                if(!confirm(missingPrompt))return;
+            }
+            if(old){
+                const duplicatePrompt=isVi
+                    ? "Hóa đơn "+old.month+" "+old.year+" đã tồn tại.\nOK: Thay thế hóa đơn cũ · Hủy: Xem hóa đơn cũ."
+                    : "A bill for "+old.month+" "+old.year+" already exists.\nOK: Replace the existing bill · Cancel: Review the existing bill.";
+                if(!confirm(duplicatePrompt)){
+                    switchReportSubTab("listing");
+                    renderBillingListing();
+                    const existingCard=[...document.querySelectorAll("#billing-listing-container .vint-card")].find(el=>el.textContent.includes(old.month+" "+old.year));
+                    if(existingCard){existingCard.scrollIntoView({behavior:"smooth",block:"center"});existingCard.classList.add("ring-2","ring-[#8c7355]");setTimeout(()=>existingCard.classList.remove("ring-2","ring-[#8c7355]"),2200);}
+                    return;
+                }
+            }
+            const newBands=readBillBands().filter(b=>b.kwh!==null);
+            const mergedBands=BILL_BANDS.map(([key])=>newBands.find(b=>b.key===key)||((old?.bands||[]).find(b=>b.key===key))||null).filter(Boolean);
+            const record={id,month,year,bill:amount,kwh,startDate:start,endDate:end,categories:populated.length?categories.filter(c=>c.percent!==null):[],donutSegments:billImageFiles.breakdown?(window.currentBillDonutSegments||[]):(old?.donutSegments||[]),bands:mergedBands,breakdownImageDataUrl:imageData||old?.breakdownImageDataUrl||"",savings:"€"+(kwh*.08).toFixed(2)+" cr"};
+            const idx=billingRecords.findIndex(x=>x.id===old?.id);if(idx>=0)billingRecords[idx]={...billingRecords[idx],...record};else billingRecords.push(record);
             try{saveUserData();}catch(e){alert("Không đủ bộ nhớ để lưu ảnh donut. M thử ảnh nhỏ hơn nhé.");return;}
             renderBillingListing();populateDashboardFilters();updateDashboardView();updateBillPerPerson();document.getElementById("upload-status-text").textContent="✓ Đã lưu hóa đơn và cập nhật Dashboard.";alert("💾 Đã lưu hóa đơn!");
         }
@@ -1552,18 +1588,34 @@
             renderDashboardEnergyDonut(filtered, monthVal === "all");
         }
         function renderDashboardEnergyDonut(records, aggregateAll) {
-            const host=_bbEl("dashboard-donut-redraw"),body=_bbEl("dashboard-bands-body"),note=_bbEl("dashboard-donut-note");
+            const body=_bbEl("dashboard-bands-body"),note=_bbEl("dashboard-donut-note");
+            const recs=records||[];
+            const totalBill=recs.reduce((sum,record)=>sum+(Number(record.bill)||0),0);
+            const billValue=_bbEl("dashboard-total-bill-value"),billLabel=_bbEl("dashboard-total-bill-label");
+            if(billValue)billValue.textContent=recs.length?"€"+totalBill.toFixed(2):"—";
+            if(billLabel)billLabel.textContent="Total Electricity Bill · "+recs.length+" "+(recs.length===1?"month":"months");
             if(!body)return;
-            const recs=records||[],one=recs.length===1?recs[0]:null;
-            if(host){if(one&&Array.isArray(one.donutSegments)&&one.donutSegments.length)renderRebuiltDonut(host,one.donutSegments,Number(one.kwh||0).toFixed(0)+" kWh");else host.innerHTML='<p class="text-[10px] text-[#7a6452] py-8 text-center">'+(aggregateAll||recs.length>1?"Chọn một tháng để xem donut đã vẽ lại.":"Tháng này chưa có dữ liệu donut được nhận diện.")+'</p>';}
-            const totals={day:{kwh:0,eur:0},peak:{kwh:0,eur:0},night:{kwh:0,eur:0}};let has=false;
-            recs.forEach(record=>(Array.isArray(record.bands)?record.bands:[]).forEach(band=>{if(!band||!totals[band.key]||!Number.isFinite(Number(band.kwh))||Number(band.kwh)<0)return;const kwh=Number(band.kwh),eur=Number.isFinite(Number(band.eur))?Number(band.eur):kwh*Number(band.price||0);totals[band.key].kwh+=kwh;totals[band.key].eur+=eur;has=true;}));
-            if(!has){body.innerHTML='<tr><td colspan="5" class="py-3 text-center text-[#7a6452]">Chưa có bảng khung giờ cho lựa chọn này.</td></tr>';if(note)note.textContent="Lưu hoá đơn có bảng Day / Peak / Night để xem ở đây.";return;}
+            const totals={day:{kwh:0,eur:0,count:0},peak:{kwh:0,eur:0,count:0},night:{kwh:0,eur:0,count:0}};
+            let has=false,completeBills=0;
+            recs.forEach(record=>{
+                const bands=Array.isArray(record.bands)?record.bands:[];
+                const present=new Set();
+                bands.forEach(band=>{
+                    if(!band||!totals[band.key]||band.kwh===null||band.kwh===undefined||!Number.isFinite(Number(band.kwh))||Number(band.kwh)<0)return;
+                    const kwh=Number(band.kwh),eur=Number.isFinite(Number(band.eur))?Number(band.eur):kwh*Number(band.price||0);
+                    totals[band.key].kwh+=kwh;totals[band.key].eur+=eur;totals[band.key].count++;present.add(band.key);has=true;
+                });
+                if(["day","peak","night"].every(key=>present.has(key))) completeBills++;
+            });
+            if(!has){body.innerHTML='<tr><td colspan="5" class="py-3 text-center text-[#7a6452]">No time-of-use data for this selection.</td></tr>';if(note)note.textContent="No time-band data for this selection.";return;}
             const totalKwh=Object.values(totals).reduce((n,v)=>n+v.kwh,0),totalEur=Object.values(totals).reduce((n,v)=>n+v.eur,0);
-            const row=(label,hint,value)=>'<tr class="border-t border-[#e3d6c6]"><td class="py-1.5 text-left font-bold">'+label+' <span class="font-normal text-[#7a6452]">'+hint+'</span></td><td>'+value.kwh.toFixed(0)+'</td><td>'+(totalKwh>0?(value.kwh/totalKwh*100).toFixed(1)+"%":"–")+'</td><td>€'+value.eur.toFixed(2)+'</td><td>'+(totalEur>0?(value.eur/totalEur*100).toFixed(1)+"%":"–")+'</td></tr>';
-            body.innerHTML=BILL_BANDS.map(([key,label,hint])=>row(label,hint,totals[key])).join('')+'<tr class="border-t-2 border-[#5c4738] font-extrabold"><td class="py-1.5 text-left">Total</td><td>'+totalKwh.toFixed(0)+'</td><td>100%</td><td>€'+totalEur.toFixed(2)+'</td><td>100%</td></tr>';
+            const row=(label,hint,value)=>'<tr class="border-t border-[#e3d6c6]"><td class="py-1.5 text-left font-bold">'+label+'</td><td>'+(value.count?value.kwh.toFixed(0):"—")+'</td><td>'+(value.count&&totalKwh>0?(value.kwh/totalKwh*100).toFixed(1)+"%":"—")+'</td><td>'+(value.count?"€"+value.eur.toFixed(2):"—")+'</td><td>'+(value.count&&totalEur>0?(value.eur/totalEur*100).toFixed(1)+"%":"—")+'</td></tr>';
+            body.innerHTML=BILL_BANDS.map(([key,label,hint])=>row(label,hint,totals[key])).join('')+'<tr class="border-t-2 border-[#5c4738] font-extrabold"><td class="py-1.5 text-left">Observed total</td><td>'+totalKwh.toFixed(0)+'</td><td>100%</td><td>€'+totalEur.toFixed(2)+'</td><td>100%</td></tr>';
             const center=_bbEl("donut-center-val");if(center)center.textContent=Math.round(totalKwh)+" kWh";
-            if(note)note.textContent=aggregateAll||recs.length>1?"Nhiều tháng · cộng dồn kWh và € theo từng khung giờ":"Tháng đã chọn · bảng đọc từ hoá đơn";
+            if(note){
+                const coverage=completeBills===recs.length?"Complete data · "+completeBills+"/"+recs.length+" bills": "Partial data · complete breakdowns "+completeBills+"/"+recs.length+" bills";
+                note.textContent=(aggregateAll||recs.length>1?"Combined time-of-use totals":"Selected bill · time-of-use data")+" · "+coverage;
+            }
         }
         // Combo chart: monthly bill as columns (€), energy usage as a line (kWh).
         function renderDashboardColumnLineChart(activeRecords) {
@@ -1601,12 +1653,20 @@
                 return;
             }
 
-            const W = 760, H = 208, left = 12, right = 12, top = 12, bottom = 20;
+            const isPhoneChart = window.matchMedia && window.matchMedia("(max-width: 700px)").matches;
+            const W = isPhoneChart ? Math.max(420, Math.round(chartContainer.clientWidth || 420)) : 760;
+            const H = isPhoneChart ? 224 : 208, left = 12, right = 12, top = 14, bottom = 22;
             const plotH = H - top - bottom;
             const maxBill = Math.max(1, ...records.map(r => Number(r.bill) || 0)) * 1.12;
             const maxKwh = Math.max(1, ...records.map(r => Number(r.kwh) || 0)) * 1.12;
-            const step = (W - left - right) / records.length;
-            const barW = Math.min(34, step * 0.48);
+            const availableWidth = W - left - right;
+            const step = Math.min(84, availableWidth / records.length);
+            const groupWidth = step * records.length;
+            const groupLeft = (W - groupWidth) / 2;
+            const barW = isPhoneChart ? Math.min(40, step * 0.60) : Math.min(78, step * 0.93);
+            xLabels.style.width = isPhoneChart ? "100%" : Math.min(availableWidth, Math.max(120, groupWidth)) + "px";
+            xLabels.style.marginLeft = "auto";
+            xLabels.style.marginRight = "auto";
             const selected = new Set((activeRecords || []).map(r => r.id));
             const points = [];
             let bars = "";
@@ -1620,7 +1680,7 @@
             }
 
             records.forEach((r, i) => {
-                const cx = left + step * (i + 0.5);
+                const cx = groupLeft + step * (i + 0.5);
                 const bill = Math.max(0, Number(r.bill) || 0);
                 const kwh = Math.max(0, Number(r.kwh) || 0);
                 const billY = top + plotH * (1 - bill / maxBill);
@@ -1633,7 +1693,7 @@
 
             const linePoints = points.map(p => p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ');
             const markers = points.map(p => '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="4" fill="#789bb2" stroke="#fffaf4" stroke-width="2" opacity="' + p.opacity + '"><title>' + p.kwh.toLocaleString() + ' kWh</title></circle>').join('');
-            chartContainer.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" class="w-full h-full overflow-visible" role="img" aria-label="Combo chart: monthly electricity bill in euro columns and electricity usage in kWh line">' + grid + bars + '<polyline points="' + linePoints + '" fill="none" stroke="#789bb2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' + markers + '</svg>';
+            chartContainer.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" class="w-full h-full overflow-visible" role="img" aria-label="Combo chart: monthly electricity bill in euro columns and electricity usage in kWh line">' + grid + bars + '<polyline points="' + linePoints + '" fill="none" stroke="#789bb2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' + markers + '</svg>';
 
             if (euroAxis) euroAxis.innerHTML = [maxBill, maxBill*.75, maxBill*.5, maxBill*.25, 0].map(v => '<span>€' + Math.round(v) + '</span>').join('');
             if (kwhAxis) kwhAxis.innerHTML = [maxKwh, maxKwh*.75, maxKwh*.5, maxKwh*.25, 0].map(v => '<span>' + Math.round(v) + '</span>').join('');
@@ -1671,6 +1731,10 @@
             loadWeeklyQuizQuestion();
         }
 
+        function getQuizLanguage() {
+            return localStorage.getItem('eco_buddy_language') === 'vi' ? 'vi' : 'en';
+        }
+
         function loadWeeklyQuizQuestion() {
             const startIdx = (currentWeek - 1) * 10;
             const endIdx = startIdx + 10;
@@ -1678,16 +1742,17 @@
 
             const relativeIndex = (currentQuizIndex - startIdx) % 10;
             const item = weekQuestions[relativeIndex];
+            const lang = getQuizLanguage();
 
             const qEl = document.getElementById('quiz-question');
             const optsEl = document.getElementById('quiz-options');
             const counterEl = document.getElementById('weekly-quiz-counter');
-            if (!qEl || !optsEl) return;
+            if (!qEl || !optsEl || !item) return;
 
-            if (counterEl) counterEl.innerText = `Week ${currentWeek}: Q ${relativeIndex + 1}/10`;
-            qEl.innerText = `Question ${relativeIndex + 1}/10: ${item.q}`;
+            if (counterEl) counterEl.innerText = (lang === 'vi' ? `Tuần ${currentWeek}: Câu ${relativeIndex + 1}/10` : `Week ${currentWeek}: Q ${relativeIndex + 1}/10`);
+            qEl.innerText = (lang === 'vi' ? `Câu hỏi ${relativeIndex + 1}/10: ` : `Question ${relativeIndex + 1}/10: `) + item.q[lang];
             optsEl.innerHTML = "";
-            item.options.forEach((optText, idx) => {
+            item.options[lang].forEach((optText, idx) => {
                 const btn = document.createElement('button');
                 btn.className = "chat-choice text-xs py-2";
                 btn.innerText = optText;
@@ -1699,12 +1764,14 @@
         function answerQuiz(optionIndex, weekQuestions, startIdx) {
             const relativeIndex = (currentQuizIndex - startIdx) % 10;
             const item = weekQuestions[relativeIndex];
+            const lang = getQuizLanguage();
             const msgs = document.getElementById('chatbot-messages');
+            const selectedOption = item.options[lang][optionIndex];
 
             msgs.innerHTML += `
                 <div class="bg-[#eaf2f8] p-3 rounded-2xl border border-[#b9d0e8] text-right">
-                    <p class="font-bold text-[#32455c]">You</p>
-                    <p class="mt-1 text-[#4a3b32]">${item.options[optionIndex]}</p>
+                    <p class="font-bold text-[#32455c]">${lang === 'vi' ? 'Bạn' : 'You'}</p>
+                    <p class="mt-1 text-[#4a3b32]">${selectedOption}</p>
                 </div>
             `;
 
@@ -1712,7 +1779,7 @@
                 msgs.innerHTML += `
                     <div class="bg-[#f5ede2] p-3 rounded-2xl border border-[#d8c7b0]">
                         <p class="font-bold text-[#5c4738]">Bé Mây ☁️</p>
-                        <p class="mt-1 text-[#4a3b32]">${item.explain} You earned +15 XP! 💚</p>
+                        <p class="mt-1 text-[#4a3b32]">${item.explain[lang]} ${lang === 'vi' ? 'Bạn nhận được +15 XP!' : 'You earned +15 XP!'} 💚</p>
                     </div>
                 `;
                 currentXP += 15;
@@ -1722,7 +1789,7 @@
                 msgs.innerHTML += `
                     <div class="bg-[#f5ede2] p-3 rounded-2xl border border-[#d8c7b0]">
                         <p class="font-bold text-[#5c4738]">Bé Mây ☁️</p>
-                        <p class="mt-1 text-[#4a3b32]">Not quite right! Review this week's tips to learn more.</p>
+                        <p class="mt-1 text-[#4a3b32]">${lang === 'vi' ? 'Chưa chính xác! Hãy xem lại các mẹo của tuần này để tìm hiểu thêm nhé.' : "Not quite right! Review this week's tips to learn more."}</p>
                     </div>
                 `;
             }
@@ -1730,7 +1797,7 @@
 
             currentQuizIndex++;
             if (currentQuizIndex >= startIdx + 10) {
-                currentQuizIndex = startIdx; 
+                currentQuizIndex = startIdx;
             }
             setTimeout(loadWeeklyQuizQuestion, 1500);
         }
@@ -1886,7 +1953,7 @@
             const grid = document.getElementById("calendar-days");
             if (!label || !grid) return;
 
-            label.textContent = new Intl.DateTimeFormat("en-IE", { month: "long", year: "numeric" }).format(calendarCursor);
+            label.textContent = new Intl.DateTimeFormat((localStorage.getItem("eco_buddy_language")||"en")==="vi" ? "vi-VN" : "en-IE", { month: "long", year: "numeric" }).format(calendarCursor);
             grid.innerHTML = "";
 
             const firstDay = new Date(year, month, 1);
@@ -2118,93 +2185,76 @@
 
 <script>
 (function(){
-const reportTranslations = {
-"📊 Energy Analytics & Reports":"📊 Energy Analytics & Reports",
-"Manage bills, edit data, list history & view dashboard analytics":"Manage bills, edit data, review history & view dashboard analytics",
-"1. Upload & Edit Bill":"1. Upload & Edit Bill","2. Billing Listing":"2. Billing Listing","3. Dashboard":"3. Dashboard",
-"📷 Upload & đọc hoá đơn điện":"📷 Upload & Read Electricity Bill",
-"Tải hai ảnh: tổng hoá đơn và biểu đồ phân bổ. OCR chỉ hỗ trợ đọc thử; hãy kiểm tra số liệu trước khi lưu.":"Upload two images: bill total and energy breakdown. OCR provides an estimate; please verify all values before saving.",
-"🧾 Ảnh A · Tổng hoá đơn":"🧾 Image A · Bill Total","🍩 Ảnh B · Phân bổ điện năng":"🍩 Image B · Energy Breakdown",
-"📸 Chụp / chọn ảnh":"📸 Take Photo / Choose Image","🔎 Đọc ảnh bằng OCR":"🔎 Read Images with OCR",
-"Đang chờ ảnh":"Waiting for images","✨ Đọc thông tin từ ảnh đã tải":"✨ Read Information from Uploaded Images",
-"Kỳ hoá đơn / tháng":"Billing Period / Month","Năm":"Year","Ngày bắt đầu":"Start Date","Ngày kết thúc":"End Date","Tổng tiền (€)":"Total Bill (€)","Số người trong nhà":"People in Household","Tổng điện năng (kWh)":"Total Energy (kWh)",
-"Nhập theo bill":"Enter bill value","🍩 Phân bổ điện năng theo nhóm":"🍩 Energy Distribution by Category",
-"Rê chuột hoặc bấm vào từng phần của donut để xem điện năng ước tính theo nhóm.":"Hover over or select a donut segment to view the estimated energy use for that category.",
-"estimated kWh":"estimated kWh","All categories":"All categories","Chọn một lát donut để xem ước tính phân bổ.":"Select a donut segment to view its estimated distribution.",
-"Tổng tỷ lệ":"Total Share","Hãy kiểm tra tổng tỷ lệ.":"Please check the total percentage.",
-"Chưa lưu hoá đơn.":"Bill not saved yet.","💾 Lưu hoá đơn & cập nhật Dashboard":"💾 Save Bill & Update Dashboard",
-"📋 Historical Billing Listing":"📋 Historical Billing Listing","📅 Filter by Month:":"📅 Filter by Month:","📆 Filter by Year:":"📆 Filter by Year:",
-"-- All Months (Average) --":"-- All Months (Average) --","-- All Years --":"-- All Years --",
-"Selected / Avg kWh":"Selected / Average kWh","Selected / Avg Bill":"Selected / Average Bill","Estimated Savings":"Estimated Savings",
-"📈 Bill (€ - Columns) & kWh Usage (Lines)":"📈 Bill (€ - Columns) & kWh Usage (Line)",
-"Auto Average Calculated":"Average Calculated Automatically",
-"Đọc lại ảnh":"Read Images Again","Đã lưu hoá đơn và cập nhật Billing Listing + Dashboard.":"Bill saved and Billing Listing + Dashboard updated.",
-"Nhập tháng, năm, tổng tiền và tổng kWh hợp lệ trước khi lưu nhé.":"Enter a valid month, year, total bill and total kWh before saving.",
-"Ngày bắt đầu không thể sau ngày kết thúc.":"The start date cannot be later than the end date.",
-"Kiểm tra tên nhóm và tỷ lệ (0–100%).":"Check category names and percentages (0–100%).",
-"💾 Đã lưu hoá đơn!":"💾 Bill saved!","Delete":"Delete","Usage:":"Usage:","Savings:":"Savings:",
-"Ghi chú: chia đều cho":"Note: split equally between","người":"people","/ người":"/ person",
-"Đọc ảnh thất bại":"Image reading failed","Không tìm thấy thông tin":"No information found",
- "Chưa có ảnh để đọc":"No images selected","OCR chưa tải được — nhập tay nhé":"OCR could not load — please enter values manually.","Đang xử lý ảnh…":"Processing images…","Đang đọc ảnh...":"Reading images...",
- "Lỗi: Không nhận diện được biểu đồ donut. Hãy thử ảnh rõ hơn và chụp trọn vòng biểu đồ.":"Error: Could not detect the donut. Try a clearer image showing the full donut.",
- "Chưa có ước tính — hãy tải ảnh phân bổ rõ nét rồi chạy OCR.":"No estimate yet — upload a clear breakdown image and run OCR.",
- "✓ Tổng phân bổ bằng 100%.":"✓ Total distribution is 100%.","Tỷ lệ phân bổ phải bằng 100%.":"Distribution must add up to 100%.",
- "OCR gặp lỗi — vui lòng nhập tay.":"OCR error — please enter values manually.","Ảnh đã sẵn sàng. Bấm đọc OCR hoặc nhập tay rồi lưu.":"Images ready. Run OCR or enter the values manually, then save.",
- "Đã tự điền ":"Auto-filled "," trường. ":" fields. ","✓ Ước tính 8 nhóm theo kích thước múi donut (OCR nhận ":"✓ Estimated 8 categories from donut segment sizes (OCR detected ","/8 keyword).":"/8 keywords).",
- "No estimate yet — upload a clear breakdown image and run OCR.":"No estimate yet — upload a clear breakdown image and run OCR.","Distribution must add up to 100%.":"Distribution must add up to 100%.",
- "Hãy nhập hoặc ước tính tỷ lệ các nhóm sao cho tổng bằng 100% trước khi lưu.":"Please enter or estimate category percentages so they add up to 100% before saving.",
-"Energy Distribution by Category":"Energy Distribution by Category",
-"Selected Usage":"Selected Usage",
-"Save a bill with an estimated breakdown to show all 8 categories.":"Save a bill with an estimated breakdown to show all 8 categories.",
-"No category estimate yet. Save a bill with all 8 category percentages to display its distribution.":"No category estimate yet. Save a bill with all 8 category percentages to display its distribution.",
-"All months · kWh-weighted category distribution":"All months · kWh-weighted category distribution",
-"Selected bill · estimated from its uploaded breakdown":"Selected bill · estimated from its uploaded breakdown",
-"Chọn tháng / Select month":"Choose month / Select month",
-"Tháng 1 · January":"January",
-"Tháng 2 · February":"February",
-"Tháng 3 · March":"March",
-"Tháng 4 · April":"April",
-"Tháng 5 · May":"May",
-"Tháng 6 · June":"June",
-"Tháng 7 · July":"July",
-"Tháng 8 · August":"August",
-"Tháng 9 · September":"September",
-"Tháng 10 · October":"October",
-"Tháng 11 · November":"November",
-"Tháng 12 · December":"December"
-
-};
-function applyReportLanguage(){
- const lang=localStorage.getItem("eco_buddy_language")||"en";
- const root=document.getElementById("tab-content-reports"); if(!root)return;
- const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
- const nodes=[]; while(walker.nextNode())nodes.push(walker.currentNode);
- nodes.forEach(n=>{
-   if(!n.__originalText)n.__originalText=n.nodeValue;
-   const original=n.__originalText;
-   if(lang==="en"){
-     let value=original;
-     Object.entries(reportTranslations).forEach(([vi,en])=>{if(vi!==en)value=value.split(vi).join(en);});
-     n.nodeValue=value;
-   } else n.nodeValue=original;
- });
- root.querySelectorAll("input[placeholder],option,button[aria-label],img[alt]").forEach(el=>{
-   ["placeholder","aria-label","alt"].forEach(attr=>{
-     if(!el.hasAttribute(attr))return;
-     const key="__original_"+attr;if(!el.dataset[key])el.dataset[key]=el.getAttribute(attr);
-     let value=el.dataset[key];
-     if(lang==="en")Object.entries(reportTranslations).forEach(([vi,en])=>{if(vi!==en)value=value.split(vi).join(en);});
-     el.setAttribute(attr,value);
-   });
+const languagePairs = [
+["🍩 Energy Distribution · Original Chart & Time Bands","🍩 Phân Bổ Điện Năng · Biểu Đồ Gốc & Khung Giờ"],
+["Eco-Buddy Home Manager","Quản lý Nhà Eco-Buddy"],
+["🌦️ Weather","🌦️ Thời tiết"],["⚡ Tariff","⚡ Giá điện"],["📊 Reports","📊 Báo cáo"],["💡 Tips","💡 Mẹo hay"],["🍳 Cooking","🍳 Nấu ăn"],["📅 Calendar","📅 Lịch"],
+["🌱 Level 1: Sprout","🌱 Cấp 1: Mầm non"],["Normal Hours ☀️","Giờ bình thường ☀️"],["Eco Buddy (Bé Mây)","Bạn đồng hành Eco (Bé Mây)"],["A little battery, leafy ears, and a friendly companion by your side.","Một người bạn nhỏ với chiếc pin xinh và đôi tai lá luôn đồng hành cùng bạn."],["Let's save energy together! Complete daily tasks to level me up! 🤍","Cùng tiết kiệm điện nhé! Hoàn thành nhiệm vụ mỗi ngày để giúp tớ lên cấp! 🤍"],
+["Dublin Weather & Outfit Suggestions","Thời tiết Dublin & gợi ý trang phục"],["Live weather data, updated regularly.","Dữ liệu thời tiết được cập nhật liên tục."],["🔄 Refresh","🔄 Làm mới"],["Đang tải thời tiết...","Đang tải thời tiết..."],["Wind:","Gió:"],["Outfit suggestions for going out:","Gợi ý trang phục khi ra ngoài:"],["Warm scarf and gloves","Khăn choàng cổ và găng tay ấm"],["Winter puffer jacket (warm grey/blue)","Áo phao mùa đông (xám/xanh ấm áp)"],
+["Daily Electricity Tariff (SST Saver+)","Giá điện hôm nay (SST Saver+)"],["☀️ Day Rate","☀️ Giá giờ ngày"],["🔴 Peak Rate","🔴 Giá giờ cao điểm"],["🟢 Night Rate (Cheapest)","🟢 Giá giờ đêm (rẻ nhất)"],["Limit high-energy appliances","Hạn chế sử dụng thiết bị tiêu thụ nhiều điện"],["Daily Eco Tasks (1 time/day)","Nhiệm vụ xanh mỗi ngày (1 lần/ngày)"],["Points","Điểm"],["Turn off lights when leaving rooms (+20 XP)","Tắt đèn khi rời khỏi phòng (+20 XP)"],["Check all rooms in the house.","Kiểm tra tất cả các phòng trong nhà."],["Complete","Hoàn thành"],["Laundry during Night Saver hours (+30 XP)","Giặt đồ trong giờ điện đêm (+30 XP)"],["Run washing machine after 23:00.","Chạy máy giặt sau 23:00."],["Put away dry dishes (+20 XP)","Cất bát đĩa đã khô (+20 XP)"],["Keep the kitchen tidy and organized.","Giữ nhà bếp gọn gàng, ngăn nắp."],
+["Energy Analytics & Reports","Phân tích & báo cáo năng lượng"],["Manage bills, edit data, list history & view dashboard analytics","Quản lý hóa đơn, chỉnh sửa dữ liệu, xem lịch sử và phân tích tổng quan"],["1. Upload & Edit Bill","1. Tải lên & chỉnh sửa hóa đơn"],["2. Billing Listing","2. Danh sách hóa đơn"],["3. Dashboard","3. Tổng quan"],["📷 Upload & đọc hoá đơn điện","📷 Tải lên & đọc hóa đơn điện"],["Upload two images: the bill summary and the energy breakdown chart. OCR provides a draft only; check all values before saving.","Tải lên hai ảnh: hóa đơn tổng và biểu đồ phân bổ. OCR chỉ hỗ trợ đọc thử; hãy kiểm tra số liệu trước khi lưu."],["🧾 Ảnh A · Tổng hoá đơn","🧾 Ảnh A · Tổng hóa đơn"],["🍩 Ảnh B · Phân bổ điện năng","🍩 Ảnh B · Phân bổ điện năng"],["📸 Chụp / chọn ảnh","📸 Chụp / chọn ảnh"],["🔎 Đọc ảnh bằng OCR","🔎 Đọc ảnh bằng OCR"],["Waiting for images","Đang chờ ảnh"],["✨ Read information from uploaded images","✨ Đọc thông tin từ ảnh đã tải"],["Billing period / month","Kỳ hoá đơn / tháng"],["Choose month","Chọn tháng"],["Year","Năm"],["Start date","Ngày bắt đầu"],["End date","Ngày kết thúc"],["Total bill (€)","Tổng tiền (€)"],["People in household","Số người trong nhà"],["Note: split equally between","Ghi chú: chia đều cho"],["people","người"],["/ person","/ người"],["Total energy (kWh)","Tổng điện năng (kWh)"],["Enter bill value","Nhập theo bill"],["🍩 Original distribution chart & time-of-use table","🍩 Biểu đồ phân bổ gốc & bảng khung giờ"],["Total Energy (kWh)","Tổng điện năng (kWh)"],["Time band","Khung giờ"],["Day","Ngày"],["Peak","Cao điểm"],["Night","Đêm"],["8am–11pm","8:00–23:00"],["5–7pm","17:00–19:00"],["11pm–8am","23:00–8:00"],["Total","Tổng"],["Bill not saved yet.","Chưa lưu hóa đơn."],["💾 Save bill & update dashboard","💾 Lưu hoá đơn & cập nhật Dashboard"],["📋 Historical Billing Listing","📋 Lịch sử hóa đơn"],["📅 Filter by Month:","📅 Lọc theo tháng:"],["-- All Months (Average) --","-- Tất cả các tháng (trung bình) --"],["📆 Filter by Year:","📆 Lọc theo năm:"],["-- All Years --","-- Tất cả các năm --"],["Selected / Avg kWh","kWh đã chọn / trung bình"],["Selected / Avg Bill","Tiền điện đã chọn / trung bình"],["Estimated Savings","Tiền tiết kiệm ước tính"],["📈 Bill (€ - Columns) & kWh Usage (Lines)","📈 Tiền điện (€ - cột) & điện năng (đường)"],["Auto Average Calculated","Tự động tính trung bình"],["Bill (€)","Tiền điện (€)"],["Usage (kWh)","Điện năng (kWh)"],["🍩 Energy Distribution · original chart & time bands","🍩 Phân bổ điện năng · biểu đồ gốc & khung giờ"],["Total Electricity Bill","Tổng tiền điện"],["Selected Usage:","Điện năng đã chọn:"],["Save a bill with Day / Peak / Night data to view it here.","Lưu hóa đơn có bảng Ngày / Cao điểm / Đêm để xem tại đây."],["Daily Reminders & Basic Rules:","Nhắc nhở hằng ngày & quy tắc cơ bản:"],["Turn off the lights:","Tắt đèn:"],["Remember to switch off room and hallway lights when not in use.","Nhớ tắt đèn phòng và hành lang khi không sử dụng."],["Check the doors:","Kiểm tra cửa:"],["Make sure the doors are locked and the kitchen door is closed.","Đảm bảo cửa đã khóa và cửa bếp đã đóng."],["Unplug devices:","Rút phích cắm thiết bị:"],["Unplug standby appliances (TV, microwave) when not in use.","Rút phích cắm các thiết bị ở chế độ chờ (TV, lò vi sóng) khi không sử dụng."],["Water heater:","Máy nước nóng:"],["Remember to switch off the water heater after showering.","Nhớ tắt máy nước nóng sau khi tắm."],
+["Smart Energy Tips & Weekly Flashcards","Mẹo tiết kiệm điện & thẻ kiến thức hằng tuần"],["Curated expert tips (3 rotating flashcards per week from our 40+ database)","Mẹo được chọn lọc (3 thẻ luân phiên mỗi tuần từ hơn 40 mẹo)"],["Bé Mây ☁️","Bé Mây ☁️"],["Live Weekly Schedule · 10 Eco Questions per Week (40 Total Pool)","Lịch hằng tuần · 10 câu hỏi xanh mỗi tuần (tổng cộng 40 câu)"],["🧠 Weekly Eco Quiz (10 Qs)","🧠 Đố vui sống xanh hằng tuần (10 câu)"],["💬 Ask Bé Mây","💬 Hỏi Bé Mây"],["Ahoy, traveller! Welcome to this week's 10-question eco challenge straight from our 40-question master pool. Let's test your knowledge!","Xin chào! Chào mừng bạn đến với thử thách sống xanh gồm 10 câu hỏi tuần này. Cùng kiểm tra kiến thức nhé!"],["Send","Gửi"],["Loading question...","Đang tải câu hỏi..."],
+["Cooking Timer & Kitchen Safety Checklist","Hẹn giờ nấu ăn & danh sách an toàn nhà bếp"],["⏱️ Choose a cooking time or enter your own:","⏱️ Chọn thời gian nấu hoặc tự nhập:"],["Start","Bắt đầu"],["⏳ Cooking countdown...","⏳ Đang đếm ngược thời gian nấu..."],["🚪 Have you closed the kitchen door?","🚪 Bạn đã đóng cửa bếp chưa?"],["Cancel Timer","Hủy hẹn giờ"],["Home & Waste Schedule","Lịch sinh hoạt & thu gom rác"],["Month...","Tháng..."],["Mon","T2"],["Tue","T3"],["Wed","T4"],["Thu","T5"],["Fri","T6"],["Sat","T7"],["Sun","CN"],["🗓️ Schedule Notes","🗓️ Ghi chú lịch"],["♻️ Waste Collection · Every Tuesday","♻️ Thu gom rác · Thứ Ba hằng tuần"],["🏡 Rent Payment · 1st of each month","🏡 Đóng tiền nhà · Ngày 1 hằng tháng"],["✦ marks a day when both are due.","✦ đánh dấu ngày có cả hai lịch."],["Next schedule reminder...","Nhắc lịch tiếp theo..."],["Let's check the kitchen together!","Cùng kiểm tra nhà bếp nhé!"],["Eco Buddy ☁️","Bạn đồng hành Eco ☁️"],["Time's up! Let's check the kitchen together!","Hết giờ! Cùng kiểm tra nhà bếp nhé!"],
+["Turn off the cooker","Tắt bếp"],["Have you turned off the cooker?","Bạn đã tắt bếp chưa?"],["Make sure the cooker knobs are turned to the OFF position.","Đảm bảo các núm bếp đã được xoay về vị trí TẮT."],["Wonderful!","Tuyệt vời!"],["Let's check the cooker knobs!","Hãy kiểm tra các núm bếp nhé!"],["Turn off the cooker hood","Tắt máy hút mùi"],["Have you turned off the cooker hood?","Bạn đã tắt máy hút mùi chưa?"],["Make sure the cooker hood fan is switched off.","Đảm bảo quạt máy hút mùi đã tắt."],["Great job!","Làm tốt lắm!"],["Switch off the cooker hood!","Hãy tắt máy hút mùi nhé!"],["Turn off the oven","Tắt lò nướng"],["Have you turned off the oven?","Bạn đã tắt lò nướng chưa?"],["Check power display.","Kiểm tra màn hình nguồn điện."],["Well done!","Giỏi lắm!"],["Check the oven!","Hãy kiểm tra lò nướng nhé!"],["Turn off the kitchen lights","Tắt đèn bếp"],["Have you turned off the kitchen lights?","Bạn đã tắt đèn bếp chưa?"],["Switch off unused lights.","Tắt những đèn không sử dụng."],["Energy saved!","Đã tiết kiệm điện!"],["Turn off lights!","Hãy tắt đèn nhé!"],["Wipe the cooker","Lau bếp"],["Have you cleaned the cooker surface?","Bạn đã lau sạch mặt bếp chưa?"],["Wipe with a damp cloth.","Lau bằng khăn ẩm."],["Sparkling clean!","Sạch bong rồi!"],["Clean up!","Hãy dọn sạch nhé!"],["All done! You earned +30 XP for keeping the kitchen safe! 💚","Hoàn tất! Bạn nhận được +30 XP vì giữ nhà bếp an toàn! 💚"],["Safety check completed!","Đã hoàn thành kiểm tra an toàn!"],["Eco Buddy is so proud of you!","Bé Mây rất tự hào về bạn!"],["💚 Done! Collect XP reward","💚 Xong! Nhận thưởng XP"],["Completed","Đã hoàn thành"],["Yes, I've done it!","Rồi, mình đã làm xong!"],["Not yet, I'll do it now","Chưa, mình sẽ làm ngay"],["💚 I've done it! Let's continue.","💚 Mình làm xong rồi! Tiếp tục nhé."],["I'll do it later","Để mình làm sau"],["Please choose an image.","Vui lòng chọn một hình ảnh."],["Image reading failed","Đọc ảnh thất bại"],["No information found","Không tìm thấy thông tin"],["No images selected","Chưa chọn ảnh"],["OCR could not load — please enter values manually.","Không tải được OCR — vui lòng nhập thông tin thủ công."],["Processing images…","Đang xử lý ảnh…"],["Reading images...","Đang đọc ảnh..."],["No estimate yet — upload a clear breakdown image and run OCR.","Chưa có ước tính — hãy tải ảnh phân bổ rõ nét rồi chạy OCR."],["Distribution must add up to 100%.","Tổng tỷ lệ phân bổ phải bằng 100%."],["OCR error — please enter values manually.","Lỗi OCR — vui lòng nhập thông tin thủ công."],["Images ready. Run OCR or enter the values manually, then save.","Ảnh đã sẵn sàng. Chạy OCR hoặc nhập thông tin thủ công rồi lưu."],["Delete","Xóa"],["Usage:","Điện năng:"],["Savings:","Tiết kiệm:"],["Category name","Tên danh mục"],["Estimated percentage","Tỷ lệ ước tính"],["Total usage","Tổng điện năng"],["Enter total kWh","Nhập tổng kWh"],["Enter bill value","Nhập số tiền hóa đơn"],["Showing All-Months Average","Đang hiển thị mức trung bình tất cả các tháng"],["No estimate yet. Save a bill with all 8 category percentages to display its distribution.","Chưa có ước tính. Hãy lưu hóa đơn với đủ tỷ lệ của 8 nhóm để hiển thị phân bổ."],["Save a bill with an estimated breakdown to show all 8 categories.","Lưu hóa đơn có phân bổ ước tính để hiển thị đủ 8 nhóm."],["All months · kWh-weighted category distribution","Tất cả tháng · phân bổ nhóm theo tỷ trọng kWh"],["Selected bill · estimated from its uploaded breakdown","Hóa đơn đã chọn · ước tính từ ảnh phân bổ đã tải lên"],
+["🚿 Shower & Water Heating","🚿 Tắm & làm nóng nước"],["High Impact","Tác động lớn"],["Don't let the water run too long while taking showers. Heating water is one of the most energy-intensive activities in your home.","Không để nước chảy quá lâu khi tắm. Làm nóng nước là một trong những hoạt động tiêu thụ nhiều điện nhất trong nhà."],["🌙 Night Saver Shifting","🌙 Chuyển sang giờ điện đêm"],["Money Saver","Tiết kiệm chi phí"],["Run your washing machine and dishwasher strictly after 23:00 to take advantage of the cheap Night Rate (€0.1954/kWh).","Chạy máy giặt và máy rửa bát sau 23:00 để tận dụng giá điện đêm thấp (€0.1954/kWh)."],["🔌 Phantom Load & Standby","🔌 Điện năng chờ"],["Easy Habit","Thói quen dễ thực hiện"],["Unplug phone chargers, microwaves, and TVs when not in use. Standby power accounts for up to 10% of household electricity bills.","Rút sạc điện thoại, lò vi sóng và TV khi không sử dụng. Điện năng chờ có thể chiếm tới 10% hóa đơn điện gia đình."],["🍳 Lids on Cooking Pots","🍳 Đậy nắp nồi khi nấu"],["Kitchen Saver","Mẹo tiết kiệm trong bếp"],["Always put lids on pots when boiling water. It traps heat and cooks food up to 30% faster, saving significant energy.","Luôn đậy nắp nồi khi đun nước. Nắp giữ nhiệt và giúp nấu nhanh hơn tới 30%, nhờ đó tiết kiệm điện đáng kể."],["🌡️ Refrigerator Optimization","🌡️ Tối ưu tủ lạnh"],["Appliance Care","Chăm sóc thiết bị"],["Keep your fridge set at 3-5°C and freezer at -18°C. Avoid keeping the door open for too long so cold air doesn't escape.","Đặt tủ lạnh ở 3–5°C và ngăn đông ở -18°C. Tránh mở cửa quá lâu để không thất thoát hơi lạnh."],["💡 Daylight Harvesting","💡 Tận dụng ánh sáng tự nhiên"],["Lighting","Chiếu sáng"],["Make the most of natural daylight during the day instead of turning on ceiling lights in rooms you're working in.","Tận dụng ánh sáng tự nhiên ban ngày thay vì bật đèn trần trong phòng đang sử dụng."],["👕 Eco Laundry Temperatures","👕 Giặt đồ ở nhiệt độ tiết kiệm"],["Laundry Tip","Mẹo giặt giũ"],["Wash your clothes at 30°C instead of 60°C whenever possible. Modern detergents work brilliantly and save 60% washer energy.","Nếu có thể, hãy giặt quần áo ở 30°C thay vì 60°C. Nước giặt hiện đại vẫn hoạt động tốt và có thể tiết kiệm 60% điện máy giặt."],["☀️ Smart Thermal Zoning","☀️ Điều chỉnh nhiệt theo khu vực"],["Heating / Cooling","Sưởi ấm / Làm mát"],["Close doors to unoccupied rooms to keep conditioned air concentrated where you actually spend your time.","Đóng cửa những phòng không sử dụng để giữ khí nóng hoặc mát ở nơi bạn sinh hoạt."],["🧊 Natural Fridge Defrosting","🧊 Rã đông tự nhiên trong tủ lạnh"],["Kitchen Habit","Thói quen trong bếp"],["Move frozen items to the fridge compartment the night before to defrost. It uses zero electricity and cools your fridge naturally.","Chuyển thực phẩm đông lạnh xuống ngăn mát từ tối hôm trước để rã đông. Cách này không tốn thêm điện và còn giúp làm mát tự nhiên."],["📺 Smart Power Strips","📺 Ổ cắm điện có công tắc"],["Electronics","Thiết bị điện tử"],["Plug your entertainment center (TV, console, soundbar) into a master switch power strip to cut all standby power effortlessly.","Cắm TV, máy chơi game và loa vào ổ cắm có công tắc tổng để dễ dàng ngắt điện chờ."],["🫖 Kettle Water Management","🫖 Đun lượng nước vừa đủ"],["Only boil as much water as you actually need in your kettle rather than filling it to the maximum every single time.","Chỉ đun lượng nước bạn cần thay vì luôn đổ đầy ấm."],["🧹 Air Filter Maintenance","🧹 Vệ sinh bộ lọc không khí"],["👍 Helpful (+10 pts)","👍 Hữu ích (+10 điểm)"],["Showing All-Months Average","Đang hiển thị trung bình tất cả các tháng"],["Multiple months · combined kWh and € by time band","Nhiều tháng · cộng dồn kWh và € theo từng khung giờ"],["Selected month · table read from bill","Tháng đã chọn · bảng đọc từ hoá đơn"],["No time-of-use data for this selection.","Chưa có bảng khung giờ cho lựa chọn này."],["Home & Waste:","Nhà cửa & rác thải:"],["Rent is due on the 1st","Tiền nhà đến hạn vào ngày 1"],["waste collection is every Tuesday","thu gom rác vào mỗi thứ Ba"],["Category","Danh mục"],["estimated","ước tính"],["Total Share","Tổng tỷ lệ"],["Please check the total percentage.","Vui lòng kiểm tra tổng tỷ lệ."],["Please enter a valid month, year, total bill and total kWh before saving.","Vui lòng nhập tháng, năm, tổng tiền và tổng kWh hợp lệ trước khi lưu."],["The start date cannot be later than the end date.","Ngày bắt đầu không thể sau ngày kết thúc."],["Check category names and percentages (0–100%).","Kiểm tra tên nhóm và tỷ lệ (0–100%)."],["No category estimate yet.","Chưa có ước tính phân bổ."],["Estimated percentage","Tỷ lệ ước tính"],["Image reading failed","Đọc ảnh thất bại"],["No information found","Không tìm thấy thông tin"],["Please choose an image.","Vui lòng chọn ảnh."],["HVAC Care","Bảo dưỡng hệ thống thông gió"],["Clean dust and filters from ventilation and cooker hoods regularly to ensure peak airflow efficiency and lower energy drain.","Thường xuyên làm sạch bụi và bộ lọc của hệ thống thông gió, máy hút mùi để luồng khí lưu thông tốt và giảm tiêu thụ điện."],
+['🍩 Energy Distribution · Original Chart & Time Bands','🍩 Phân Bổ Điện Năng · Biểu Đồ Gốc & Khung Giờ'],['🍩 Original Chart & Time Bands','🍩 Biểu đồ phân bổ gốc & bảng khung giờ'],['Please choose an image.','Vui lòng chọn ảnh.'],['OCR could not load. You can still enter the values manually.','OCR chưa tải được. M vẫn có thể nhập tay.'],['Please enter a valid month, year, total bill and total kWh before saving.','Nhập tháng, năm, tổng tiền và tổng kWh hợp lệ trước khi lưu nhé.'],['The start date cannot be later than the end date.','Ngày bắt đầu không thể sau ngày kết thúc.'],['Check category names and percentages (0–100%).','Kiểm tra tên nhóm và tỷ lệ (0–100%).'],['If you entered estimates, the total percentage must equal 100%. If you cannot estimate them yet, leave them blank and save the original image.','Nếu đã nhập EST, tổng tỷ lệ cần bằng 100%. Nếu chưa EST được, cứ để trống và lưu ảnh gốc.'],['Not enough storage to save the donut image. Please try a smaller image.','Không đủ bộ nhớ để lưu ảnh donut. M thử ảnh nhỏ hơn nhé.'],['💾 Bill saved!','💾 Đã lưu hóa đơn!'],['Thank you for your feedback! +10 Eco Points added! 💚','Cảm ơn bạn đã phản hồi! Đã cộng +10 Điểm Eco! 💚'],['Thanks! We\'ll show you better tips next time.','Cảm ơn bạn! Lần sau chúng tôi sẽ gợi ý mẹo phù hợp hơn.'],['Please enter a number of minutes between 1 and 180.','Vui lòng nhập số phút từ 1 đến 180.'],["Band","Khung"],["kWh %","kWh %"],["€ %","€ %"],["No time-band data for this selection.","Chưa có dữ liệu khung giờ cho lựa chọn này."],["Partial data · complete breakdowns ","Dữ liệu chưa đầy đủ · hóa đơn có đủ bảng phân bổ "],
+["Complete data · ","Dữ liệu đầy đủ · "],
+["Combined time-of-use totals","Tổng cộng theo khung giờ"],
+["Selected bill · time-of-use data","Hóa đơn đã chọn · dữ liệu khung giờ"],
+["Observed total","Tổng số liệu đã ghi nhận"],
+["No time-of-use data for this selection.","Không có dữ liệu khung giờ cho lựa chọn này."],
+];
+const lang = () => localStorage.getItem("eco_buddy_language") === "vi" ? "vi" : "en";
+function translateText(value, target){
+ let out=String(value);
+ const ordered=languagePairs.slice().sort((a,b)=>Math.max(b[0].length,b[1].length)-Math.max(a[0].length,a[1].length));
+ for(const pair of ordered){
+  const from=target==="vi"?pair[0]:pair[1], to=target==="vi"?pair[1]:pair[0];
+  if(from && from!==to) out=out.split(from).join(to);
+ }
+ if(target==="vi"){
+  out=out.replace(/Week (\d+) \/ 4/g,"Tuần $1 / 4").replace(/Week (\d+): Q (\d+)\/(\d+)/g,"Tuần $1: Câu $2/$3").replace(/Question (\d+)\/(\d+):/g,"Câu hỏi $1/$2:").replace(/Step (\d+) \/ 5/g,"Bước $1 / 5").replace(/(\d+) min/g,"$1 phút").replace(/(\d+) months?/g,"$1 tháng").replace(/(\d+) fields?/g,"$1 trường");
+ } else {
+  out=out.replace(/Tuần (\d+) \/ 4/g,"Week $1 / 4").replace(/Tuần (\d+): Câu (\d+)\/(\d+)/g,"Week $1: Q $2/$3").replace(/Câu hỏi (\d+)\/(\d+):/g,"Question $1/$2:").replace(/Bước (\d+) \/ 5/g,"Step $1 / 5").replace(/(\d+) phút/g,"$1 min").replace(/(\d+) tháng/g,"$1 months").replace(/(\d+) trường/g,"$1 fields");
+ }
+ return out;
+}
+const nativeAlert=window.alert.bind(window);
+const nativeConfirm=window.confirm.bind(window);
+window.alert=function(message){return nativeAlert(translateText(message,lang()));};
+window.confirm=function(message){return nativeConfirm(translateText(message,lang()));};
+function applyAppLanguage(){
+ const target=lang();
+ document.documentElement.lang=target;
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ let node;
+ while((node=walker.nextNode())){
+  const next=translateText(node.nodeValue,target);
+  if(next!==node.nodeValue)node.nodeValue=next;
+ }
+ document.querySelectorAll("[placeholder],[aria-label],[title],[alt]").forEach(el=>{
+  for(const attr of ["placeholder","aria-label","title","alt"]){
+   if(el.hasAttribute(attr)){const old=el.getAttribute(attr),next=translateText(old,target);if(next!==old)el.setAttribute(attr,next);}
+  }
  });
 }
-window.applyReportLanguage=applyReportLanguage;
-const oldSetAppLanguage=window.setAppLanguage;
+window.applyAppLanguage=applyAppLanguage;
+const originalSetLanguage=window.setAppLanguage;
 window.setAppLanguage=function(language){
- if(typeof oldSetAppLanguage==="function")oldSetAppLanguage(language);
- applyReportLanguage();
+ if(typeof originalSetLanguage==="function")originalSetLanguage(language);
+ applyAppLanguage();
+ if(typeof renderCalendar==="function")renderCalendar();
+ if(typeof initWeeklyContent==="function")initWeeklyContent();
+ if(typeof loadWeeklyQuizQuestion==="function")loadWeeklyQuizQuestion();
+ if(typeof renderBillingListing==="function")renderBillingListing();
+ if(typeof populateDashboardFilters==="function")populateDashboardFilters();
+ if(typeof updateDashboardView==="function")updateDashboardView();
 };
-document.addEventListener("DOMContentLoaded",()=>{applyReportLanguage();new MutationObserver(()=>applyReportLanguage()).observe(document.getElementById("tab-content-reports")||document.body,{childList:true,subtree:true});});
+document.addEventListener("DOMContentLoaded",()=>{
+ applyAppLanguage();
+ const observer=new MutationObserver(()=>applyAppLanguage());
+ observer.observe(document.body,{childList:true,subtree:true,characterData:true});
+});
 })();
 </script>
 
