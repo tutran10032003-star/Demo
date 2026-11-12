@@ -5,27 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Eco-Buddy Home Manager ⚡☁️</title>
 
-    <!-- PWA CONFIGURATION -->
-    <link rel="manifest" href="/Saving_Money/manifest.json">
-    <meta name="theme-color" content="#fcf8f2">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Eco-Buddy">
-    <link rel="apple-touch-icon" href="/Saving_Money/icons/icon-192.png">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        #report-subtab-upload input[type="number"],#report-subtab-upload input[type="date"],#billing-listing-container,#dash-stat-kwh,#dash-stat-bill,#dash-stat-savings,#donut-center-val{font-family:inherit;font-variant-numeric:tabular-nums;font-feature-settings:"tnum";}
-        * { box-sizing: border-box; }
-
-        html {
-            -webkit-text-size-adjust: 100%;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
+        * { box-sizing: border-box; caret-color: transparent; }
+        html { -webkit-text-size-adjust: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         body {
             font-family: 'Quicksand', sans-serif;
             background-color: #fcf8f2;
@@ -33,15 +18,10 @@
             min-height: 100vh;
             min-height: 100dvh;
             overflow-x: hidden;
-            padding-top: var(--header-height, 80px);
+            padding-top: 80px;
         }
-
-        button, input, textarea, select { font-family: inherit; touch-action: manipulation; }
+        button, input, textarea, select { font-family: inherit; touch-action: manipulation; caret-color: auto; }
         button { cursor: pointer; }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #f4ecdf; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb { background: #d8c7b0; border-radius: 3px; }
 
         .vintage-panel {
             background: linear-gradient(145deg, #fffdfa 0%, #f7f1e5 100%);
@@ -50,128 +30,64 @@
             border-radius: 1.5rem;
             width: 100%;
             max-width: 780px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
         }
-
         .vint-card {
             background: #fffaf4;
             border: 1.5px solid #5c4738;
             border-radius: 1rem;
             box-shadow: 2px 2px 0 #5c4738;
         }
-
-        /* FIXED HEADER */
         header {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            z-index: 10000 !important;
-            width: 100%;
+            position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important;
+            z-index: 10000 !important; width: 100%;
             background: rgba(255,253,250,.97);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             box-shadow: 0 3px 10px rgba(92,71,56,.10);
         }
-
         .header-inner {
-            width: 100%;
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
+            width: 100%; max-width: 860px; margin: 0 auto; padding: 12px 16px;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
         }
-
         .nav-pills {
-            width: 100%;
-            max-width: 560px;
-            padding: 5px;
-            display: grid;
-            grid-template-columns: repeat(7, minmax(0, 1fr));
-            gap: 3px;
-            background: #f0e6d6;
-            border-radius: 30px;
-            border: 1px solid #e4d8c5;
-            flex-shrink: 0;
+            width: 100%; max-width: 560px; padding: 5px;
+            display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px;
+            background: #f0e6d6; border-radius: 30px; border: 1px solid #e4d8c5;
         }
-
         .nav-btn {
-            min-width: 0;
-            border: 2px solid transparent;
-            border-radius: 20px;
-            padding: 9px 2px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #4a3b32;
-            background: transparent;
-            transition: .2s;
-            text-align: center;
-            white-space: nowrap;
+            border: 2px solid transparent; border-radius: 20px; padding: 9px 2px;
+            font-size: 12px; font-weight: 700; color: #4a3b32; background: transparent; text-align: center;
         }
+        .nav-btn.active { background: #8c7355; color: white; border-color: #5c4738; box-shadow: 2px 2px 0 #5c4738; }
 
-        .nav-btn.active {
-            background: #8c7355;
-            color: white;
-            border-color: #5c4738;
-            box-shadow: 2px 2px 0 #5c4738;
-        }
-
-        /* MASCOT */
         .eco-mascot {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: visible;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
+            width: 200px; height: 200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: center; overflow: visible;
         }
+        .eco-character { width: 100%; height: 100%; overflow: visible; animation: mascot-float 3s ease-in-out infinite; transform-origin: center bottom; }
+        @keyframes mascot-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
-        .eco-character {
-            width: 100%;
-            height: 100%;
-            overflow: visible;
-            animation: mascot-float 3s ease-in-out infinite;
-            transform-origin: center bottom;
-        }
-
-        @keyframes mascot-float {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        @media (max-width: 700px) {
+        @media (max-width:700px) {
             .header-inner { display: block; padding: 10px 12px; }
-            .nav-pills { max-width: 100%; display: flex; overflow-x: auto; gap: 6px; scrollbar-width: none; }
-            .nav-pills::-webkit-scrollbar { display: none; }
-            .nav-btn { flex: 0 0 auto; min-width: max-content; padding: 10px 12px; font-size: 13px; }
-            main { padding-left: 12px !important; padding-right: 12px !important; }
+            .nav-pills { max-width: 100%; display: flex; overflow-x: auto; gap: 6px; }
+            .nav-btn { flex: 0 0 auto; padding: 10px 12px; font-size: 13px; }
         }
     </style>
 </head>
 
 <body class="min-h-screen flex flex-col justify-between selection:bg-amber-200">
 
-    <!-- HEADER + TABS -->
+    <!-- HEADER -->
     <header class="border-b-2 border-[#5c4738]">
         <div class="header-inner">
-            <div class="flex items-center justify-between gap-3 mb-2 sm:mb-0">
-                <div class="flex items-center space-x-2.5">
-                    <span class="text-2xl">🌿</span>
-                    <div>
-                        <h1 class="font-bold text-xs sm:text-base text-[#4a3b32] leading-tight tracking-tight whitespace-nowrap">Eco-Buddy Home Manager</h1>
-                        <p class="text-xs text-[#7a6452] font-semibold mt-0.5">🕒 <span id="realtime-clock" class="text-[#5c4738] font-bold">--:--:--</span></p>
-                    </div>
+            <div class="flex items-center space-x-2.5">
+                <span class="text-2xl">🌿</span>
+                <div>
+                    <h1 class="font-bold text-xs sm:text-base text-[#4a3b32]">Eco-Buddy Home Manager</h1>
+                    <p class="text-xs text-[#7a6452] font-semibold">🕒 <span id="realtime-clock" class="text-[#5c4738] font-bold"></span></p>
                 </div>
             </div>
-
-            <nav class="nav-pills" aria-label="Main navigation">
+            <nav class="nav-pills">
                 <button onclick="switchTab('weather')" id="tab-btn-weather" class="nav-btn">🌦️ Weather</button>
                 <button onclick="switchTab('tracker')" id="tab-btn-tracker" class="nav-btn active">⚡ Tariff</button>
                 <button onclick="switchTab('reports')" id="tab-btn-reports" class="nav-btn">📊 Reports</button>
@@ -186,7 +102,7 @@
     <!-- MAIN -->
     <main class="max-w-4xl mx-auto px-4 py-6 flex-grow w-full space-y-6">
 
-        <!-- MASCOT CARD -->
+        <!-- MASCOT CARD ĐẦY ĐỦ CHI TIẾT SVG GỐC -->
         <div id="mascot-global-card" class="vintage-panel p-6 flex flex-col items-center text-center">
             <div class="w-full flex justify-between items-center px-2 mb-2 text-xs font-extrabold text-[#5c4738]">
                 <span id="mascot-level-badge" class="bg-[#f0e6d6] px-3 py-1 rounded-full border border-[#5c4738]">🌱 Level 1: Sprout</span>
@@ -200,11 +116,37 @@
                 <div class="eco-mascot">
                     <svg id="main-mascot-svg" class="eco-character level-1" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
                         <ellipse cx="150" cy="269" rx="66" ry="8" fill="#b9a27b" opacity=".18"/>
+                        <!-- Chân -->
                         <path d="M116 220 Q105 239 107 252 Q110 261 134 257 L145 229" fill="#fff9ed" stroke="#75604d" stroke-width="5" stroke-linejoin="round"/>
                         <ellipse cx="121" cy="257" rx="19" ry="10" fill="#fff9ed" stroke="#75604d" stroke-width="4"/>
                         <path d="M174 222 Q188 239 185 252 Q182 262 159 257 L151 229" fill="#fff9ed" stroke="#75604d" stroke-width="5" stroke-linejoin="round"/>
                         <ellipse cx="176" cy="257" rx="19" ry="10" fill="#fff9ed" stroke="#75604d" stroke-width="4"/>
+                        <!-- Thân mây -->
                         <path class="mascot-body-fill" d="M83 164 Q65 153 69 134 Q53 119 65 101 Q71 82 91 81 Q96 58 119 62 Q137 43 153 57 Q171 43 189 61 Q215 58 224 82 Q246 89 241 111 Q257 129 240 147 Q249 168 229 184 Q232 207 211 220 Q194 236 170 233 Q150 241 128 233 Q102 237 87 218 Q68 207 77 186 Q64 176 83 164 Z" fill="#fff9ed" stroke="#75604d" stroke-width="5" stroke-linejoin="round"/>
+                        <!-- Lá trên đầu -->
+                        <g>
+                            <path d="M145 57 Q108 45 103 23 Q134 17 151 46 Z" fill="#a3a875" stroke="#756b49" stroke-width="4"/>
+                            <path d="M151 48 Q171 13 198 25 Q194 52 158 62 Z" fill="#7d9368" stroke="#756b49" stroke-width="4"/>
+                        </g>
+                        <!-- Mặt -->
+                        <g>
+                            <ellipse cx="105" cy="137" rx="13" ry="9" fill="#f5bca8"/>
+                            <ellipse cx="197" cy="137" rx="13" ry="9" fill="#f5bca8"/>
+                            <ellipse cx="128" cy="124" rx="5" ry="7" fill="#574b40"/>
+                            <ellipse cx="177" cy="124" rx="5" ry="7" fill="#574b40"/>
+                            <path d="M146 140 Q151 148 157 140" fill="none" stroke="#574b40" stroke-width="3.5" stroke-linecap="round"/>
+                        </g>
+                        <!-- Khăn quàng cổ -->
+                        <g>
+                            <path d="M78 159 Q113 173 151 158 Q190 173 226 154 L223 178 Q186 194 150 178 Q113 195 81 178 Z" fill="#8e9973" stroke="#6e7457" stroke-width="4"/>
+                            <path d="M204 175 Q224 190 214 217 L197 204 L193 187" fill="#9ca17a" stroke="#6e7457" stroke-width="4"/>
+                        </g>
+                        <!-- Tay -->
+                        <g>
+                            <path d="M83 165 Q62 161 52 179 Q42 193 51 205 Q62 217 77 198 Q83 190 89 183" fill="#fff9ed" stroke="#75604d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M220 163 Q244 158 249 136" fill="none" stroke="#75604d" stroke-width="18" stroke-linecap="round"/>
+                            <ellipse cx="249" cy="136" rx="8" ry="7" fill="#fff9ed" stroke="#75604d" stroke-width="3"/>
+                        </g>
                     </svg>
                 </div>
                 <div id="status-badge" class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#A8C7A0] text-white text-[11px] font-extrabold px-4 py-1 rounded-full shadow border-2 border-[#5c4738] whitespace-nowrap">
@@ -215,82 +157,227 @@
             <p id="mascot-speech" class="text-xs text-[#5c4738] font-medium bg-[#f5ede2] p-3 rounded-2xl border border-[#5c4738] w-full mt-3 leading-relaxed">"Let's save energy together! Complete daily tasks to level me up! 🤍"</p>
         </div>
 
-        <!-- TAB 1: TARIFF & TASKS -->
+        <!-- TAB: WEATHER -->
+        <div id="tab-content-weather" class="hidden space-y-6">
+            <div class="vintage-panel p-5 space-y-4">
+                <h3 class="font-bold text-[#4a3b32] text-base">🌦️ Thời Tiết Dublin & Gợi Ý Mặc Đồ</h3>
+                <div class="bg-gradient-to-br from-[#8fa8be] to-[#6a849b] text-white p-5 rounded-2xl border-2 border-[#5c4738] flex items-center justify-between">
+                    <div>
+                        <p id="weather-condition" class="text-sm font-extrabold">Đang tải thời tiết...</p>
+                        <p id="weather-temp" class="text-3xl font-black">--°C</p>
+                    </div>
+                    <div class="text-6xl">☁️</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: TARIFF & TASKS -->
         <div id="tab-content-tracker" class="space-y-6">
             <div class="vintage-panel p-6 space-y-4">
-                <h2 class="font-bold text-[#4a3b32] text-base flex items-center gap-2 border-b-2 border-[#5c4738] pb-2.5">
-                    <span>⚡</span> Daily Electricity Tariff (SST Saver+)
-                </h2>
-                <div class="space-y-3 text-xs sm:text-sm">
-                    <div class="vint-card p-3.5 flex items-start justify-between gap-3 bg-[#f2f7ec]">
-                        <div><p class="font-extrabold text-[#3b4a32]">☀️ Day Rate</p></div>
-                        <span class="font-black text-[#3b4a32] bg-[#d9e8cc] px-2.5 py-1 rounded-xl border border-[#5c4738]">€0.3719/kWh</span>
+                <h2 class="font-bold text-[#4a3b32] text-base border-b-2 border-[#5c4738] pb-2.5">⚡ Daily Electricity Tariff (SST Saver+)</h2>
+                <div class="space-y-3 text-xs">
+                    <div class="vint-card p-3.5 flex items-center justify-between bg-[#f2f7ec]">
+                        <span>☀️ Day Rate (08:00 - 17:00 & 19:00 - 23:00)</span>
+                        <span class="font-black text-[#3b4a32]">€0.3719/kWh</span>
+                    </div>
+                    <div class="vint-card p-3.5 flex items-center justify-between bg-[#fbe8e6]">
+                        <span>🔴 Peak Rate (17:00 - 19:00)</span>
+                        <span class="font-black text-[#5c3232]">€0.3968/kWh</span>
+                    </div>
+                    <div class="vint-card p-3.5 flex items-center justify-between bg-[#eaf2f8]">
+                        <span>🟢 Night Rate (23:00 - 08:00)</span>
+                        <span class="font-black text-[#32455c]">€0.1954/kWh</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TASKS -->
+            <div class="vintage-panel p-6 space-y-3">
+                <h3 class="font-bold text-[#4a3b32] text-sm flex items-center justify-between">
+                    <span>🌱 Daily Eco Tasks</span>
+                    <span id="eco-points-label" class="text-xs bg-[#8c7355] text-white px-2.5 py-1 rounded-xl">0 Points 🌱</span>
+                </h3>
+                <div class="space-y-2 text-xs">
+                    <div class="vint-card p-3 flex items-center justify-between bg-white">
+                        <span>Turn off lights when leaving rooms (+20 XP)</span>
+                        <button onclick="completeTask(0, 20)" id="task-btn-0" class="px-3 py-1.5 bg-[#A8C7A0] text-white font-bold rounded-xl">Complete</button>
+                    </div>
+                    <div class="vint-card p-3 flex items-center justify-between bg-white">
+                        <span>Laundry during Night Saver hours (+30 XP)</span>
+                        <button onclick="completeTask(1, 30)" id="task-btn-1" class="px-3.5 py-1.5 bg-[#A8C7A0] text-white font-bold rounded-xl">Complete</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 2: REPORTS -->
+        <!-- TAB: REPORTS -->
         <div id="tab-content-reports" class="hidden space-y-6">
             <div class="vintage-panel p-6 space-y-5">
                 <h2 class="font-bold text-[#4a3b32] text-base">📊 Energy Analytics & Reports</h2>
-                <p class="text-xs text-[#7a6452]">Tab Reports đang hoạt động bình thường.</p>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <button onclick="switchReportSubTab('upload')" id="subtab-btn-upload" class="p-2.5 bg-[#8c7355] text-white font-bold rounded-xl">1. Upload & Edit Bill</button>
+                    <button onclick="switchReportSubTab('listing')" id="subtab-btn-listing" class="p-2.5 bg-[#fffaf4] text-[#4a3b32] font-bold rounded-xl">2. Billing Listing</button>
+                    <button onclick="switchReportSubTab('dashboard')" id="subtab-btn-dashboard" class="p-2.5 bg-[#fffaf4] text-[#4a3b32] font-bold rounded-xl">3. Dashboard</button>
+                </div>
+
+                <!-- UPLOAD SUBTAB -->
+                <div id="report-subtab-upload" class="space-y-4 vint-card p-4 bg-white">
+                    <h3 class="font-bold text-sm text-[#5c4738]">📷 Upload & đọc hoá đơn điện</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="vint-card p-3"><b class="text-xs">🧾 Tổng hóa đơn</b>
+                            <input type="file" accept="image/*" class="mt-2 text-xs" onchange="previewImg(event)">
+                        </div>
+                        <div class="vint-card p-3"><b class="text-xs">🍩 Phân bổ điện năng</b>
+                            <input type="file" accept="image/*" class="mt-2 text-xs">
+                        </div>
+                    </div>
+
+                    <!-- NÚT ĐIỀN NHANH % PHÂN BỔ KHI KHÔNG QUÉT ĐƯỢC -->
+                    <div class="p-3 bg-[#f0e6d6] rounded-xl border border-[#5c4738] space-y-2">
+                        <p class="text-xs font-bold text-[#5c4738]">⚡ Khắc phục nhanh nếu OCR không quét được %:</p>
+                        <button type="button" onclick="quickFillPercentages()" class="w-full py-2 bg-[#8c7355] text-white rounded-xl text-xs font-bold">Điền nhanh mẫu 8 nhóm (Tổng 100%)</button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 text-xs">
+                        <label>Tháng <select id="edit-bill-month" class="w-full p-2 border rounded"><option value="January">Tháng 1</option><option value="February">Tháng 2</option><option value="March">Tháng 3</option><option value="April">Tháng 4</option><option value="May">Tháng 5</option><option value="June">Tháng 6</option><option value="July">Tháng 7</option><option value="August">Tháng 8</option><option value="September">Tháng 9</option><option value="October">Tháng 10</option><option value="November">Tháng 11</option><option value="December">Tháng 12</option></select></label>
+                        <label>Năm <input id="edit-bill-year" type="number" value="2026" class="w-full p-2 border rounded"></label>
+                        <label>Tổng tiền (€) <input id="edit-bill-amount" type="number" step="0.01" class="w-full p-2 border rounded" placeholder="150.00"></label>
+                        <label>Tổng kWh <input id="edit-bill-kwh" type="number" step="0.01" class="w-full p-2 border rounded" placeholder="450"></label>
+                    </div>
+
+                    <div id="bill-category-editor" class="grid grid-cols-2 gap-2 text-xs"></div>
+                    <button type="button" onclick="saveEditedBill()" class="w-full py-3 bg-[#A8C7A0] text-white font-bold rounded-xl">💾 Lưu hóa đơn</button>
+                </div>
+
+                <!-- LISTING SUBTAB -->
+                <div id="report-subtab-listing" class="hidden space-y-3">
+                    <div id="billing-listing-container" class="space-y-2 text-xs"></div>
+                </div>
+
+                <!-- DASHBOARD SUBTAB -->
+                <div id="report-subtab-dashboard" class="hidden space-y-3">
+                    <div class="vint-card p-4 bg-white">
+                        <p class="text-xs font-bold mb-2">📈 Biểu đồ điện năng</p>
+                        <div id="dashboard-col-chart" class="h-40 flex items-end gap-3 justify-center"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- CÁC TAB KHÁC ĐỂ TRỐNG HOẶC RÚT GỌN ĐỂ TRÁNH LỖI DOM -->
-        <div id="tab-content-weather" class="hidden vintage-panel p-6 text-center"><p>Đang cập nhật thời tiết Dublin...</p></div>
-        <div id="tab-content-tips" class="hidden vintage-panel p-6 text-center"><p>Mẹo tiết kiệm điện hay mỗi ngày.</p></div>
-        <div id="tab-content-chatbot" class="hidden vintage-panel p-6 text-center"><p>Trò chuyện cùng Bé Mây.</p></div>
-        <div id="tab-content-checklist" class="hidden vintage-panel p-6 text-center"><p>Cooking & Checklist.</p></div>
-        <div id="tab-content-calendar" class="hidden vintage-panel p-6 text-center"><p>Lịch đổ rác và tiền nhà.</p></div>
+        <!-- CÁC TAB KHÁC -->
+        <div id="tab-content-tips" class="hidden vintage-panel p-6 text-xs"><p>💡 Mẹo hay tiết kiệm điện mỗi ngày.</p></div>
+        <div id="tab-content-chatbot" class="hidden vintage-panel p-6 text-xs"><p>☁️ Trò chuyện cùng Bé Mây.</p></div>
+        <div id="tab-content-checklist" class="hidden vintage-panel p-6 text-xs"><p>🍳 Cooking & Safety Timer.</p></div>
+        <div id="tab-content-calendar" class="hidden vintage-panel p-6 text-xs"><p>📅 Lịch thu gom rác & tiền nhà.</p></div>
 
     </main>
 
-    <!-- JAVASCRIPT ĐẢM BẢO KHÔNG BỊ TREO -->
     <script>
-        function updateHeaderHeight() {
-            const header = document.querySelector("header");
-            if (!header) return;
-            document.documentElement.style.setProperty("--header-height", header.offsetHeight + "px");
-        }
+        let currentXP = 0;
+        let currentPoints = 0;
+        let billingRecords = [
+            { id: "september-2026", month: "September", year: 2026, bill: 123.00, kwh: 390 },
+            { id: "october-2026", month: "October", year: 2026, bill: 240.00, kwh: 750 }
+        ];
 
-        function startRealtimeClock() {
-            const clockEl = document.getElementById('realtime-clock');
-            if (!clockEl) return;
-            setInterval(() => {
-                clockEl.innerText = new Date().toLocaleTimeString();
-            }, 1000);
-        }
+        const defaultCats = [
+            ["waterHeating", "Water Heating", 20],
+            ["cooking", "Cooking", 15],
+            ["entertainment", "Entertainment", 10],
+            ["laundry", "Laundry", 15],
+            ["refrigeration", "Refrigeration", 15],
+            ["alwaysOn", "Always On", 10],
+            ["lighting", "Lighting", 10],
+            ["other", "Other", 5]
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setInterval(() => { document.getElementById('realtime-clock').innerText = new Date().toLocaleTimeString(); }, 1000);
+            renderCategoryEditor();
+            renderBillingListing();
+            renderChart();
+        });
 
         function switchTab(tabName) {
-            const tabs = ['weather', 'tracker', 'reports', 'tips', 'chatbot', 'checklist', 'calendar'];
-            tabs.forEach(t => {
-                const el = document.getElementById(`tab-content-${t}`);
-                const btn = document.getElementById(`tab-btn-${t}`);
-                if (el) el.classList.add('hidden');
-                if (btn) btn.classList.remove('active');
+            ['weather', 'tracker', 'reports', 'tips', 'chatbot', 'checklist', 'calendar'].forEach(t => {
+                document.getElementById(`tab-content-${t}`)?.classList.add('hidden');
+                document.getElementById(`tab-btn-${t}`)?.classList.remove('active');
             });
-
-            const targetEl = document.getElementById(`tab-content-${tabName}`);
-            const targetBtn = document.getElementById(`tab-btn-${tabName}`);
-            if (targetEl) targetEl.classList.remove('hidden');
-            if (targetBtn) targetBtn.classList.add('active');
-
-            // Ẩn/hiện mascot theo tab nếu muốn
-            const mascotCard = document.getElementById('mascot-global-card');
-            if (mascotCard) {
-                mascotCard.classList.toggle('hidden', tabName !== 'tracker');
-            }
+            document.getElementById(`tab-content-${tabName}`)?.classList.remove('hidden');
+            document.getElementById(`tab-btn-${tabName}`)?.classList.add('active');
+            document.getElementById('mascot-global-card')?.classList.toggle('hidden', tabName !== 'tracker');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            updateHeaderHeight();
-            startRealtimeClock();
-        });
+        function switchReportSubTab(subName) {
+            ['upload', 'listing', 'dashboard'].forEach(s => {
+                document.getElementById(`report-subtab-${s}`)?.classList.add('hidden');
+            });
+            document.getElementById(`report-subtab-${subName}`)?.classList.remove('hidden');
+            if (subName === 'dashboard') renderChart();
+        }
 
-        window.addEventListener('resize', updateHeaderHeight);
+        function renderCategoryEditor() {
+            const host = document.getElementById("bill-category-editor");
+            if (!host) return;
+            host.innerHTML = defaultCats.map(c => `
+                <div class="p-2 bg-[#fffaf4] border rounded">
+                    <span>${c[1]}</span>
+                    <input data-cat="${c[0]}" type="number" value="${c[2]}" class="w-full mt-1 p-1 border rounded bg-white">
+                </div>
+            `).join("");
+        }
+
+        function quickFillPercentages() {
+            const vals = [20, 15, 10, 15, 15, 10, 10, 5];
+            document.querySelectorAll("[data-cat]").forEach((input, i) => { input.value = vals[i]; });
+            alert("Đã điền nhanh 100% tỷ lệ phân bổ!");
+        }
+
+        function previewImg(e) { alert("Đã nhận ảnh hóa đơn!"); }
+
+        function saveEditedBill() {
+            const month = document.getElementById("edit-bill-month").value;
+            const year = Number(document.getElementById("edit-bill-year").value);
+            const bill = Number(document.getElementById("edit-bill-amount").value);
+            const kwh = Number(document.getElementById("edit-bill-kwh").value);
+
+            if (!bill || !kwh) { alert("Vui lòng nhập số tiền và số kWh hợp lệ!"); return; }
+
+            billingRecords.push({ id: month.toLowerCase()+"-"+year, month, year, bill, kwh });
+            renderBillingListing();
+            renderChart();
+            alert("💾 Lưu hóa đơn thành công!");
+        }
+
+        function renderBillingListing() {
+            const c = document.getElementById('billing-listing-container');
+            if (!c) return;
+            c.innerHTML = billingRecords.map(r => `
+                <div class="vint-card p-3 flex justify-between items-center bg-white">
+                    <span><b>${r.month} ${r.year}</b> - ${r.kwh} kWh</span>
+                    <span class="font-black text-[#5c3232]">€${r.bill.toFixed(2)}</span>
+                </div>
+            `).join("");
+        }
+
+        function renderChart() {
+            const chart = document.getElementById('dashboard-col-chart');
+            if (!chart) return;
+            chart.innerHTML = billingRecords.map(r => `
+                <div class="flex flex-col items-center">
+                    <div style="height: ${Math.min(120, r.bill * 0.5)}px; width: 35px;" class="bg-[#e8b98f] rounded-t"></div>
+                    <span class="text-[10px] mt-1">${r.month.slice(0,3)}</span>
+                </div>
+            `).join("");
+        }
+
+        function completeTask(idx, xp) {
+            currentXP += xp;
+            document.getElementById('mascot-xp-bar').style.width = Math.min(100, currentXP) + '%';
+            document.getElementById('mascot-xp-text').innerText = `${currentXP} / 100 XP`;
+            alert(`🎉 Hoàn thành nhiệm vụ! +${xp} XP`);
+        }
     </script>
 </body>
 </html>
