@@ -256,6 +256,9 @@ button.ghost:hover { background: #c8e4f2; }
 .town.lv-Normal { border-left-color: #15803d; }
 .town.lv-Standby { border-left-color: #b45309; }
 .town.lv-Barriers { border-left-color: #b91c1c; }
+tr.lv-Normal { border-left-color: #15803d; }
+tr.lv-Standby { border-left-color: #b45309; }
+tr.lv-Barriers { border-left-color: #b91c1c; }
 .town-top { display: flex; justify-content: space-between; gap: 8px; align-items: flex-start; }
 .town-name { font-weight: 800; color: var(--text); font-size: 16px; }
 .muted { color: var(--muted); font-size: 12.5px; font-family: system-ui, -apple-system, sans-serif; }
@@ -332,6 +335,7 @@ details.fold[open] summary { margin-bottom: 12px; }
 table { border-collapse: collapse; width: 100%; min-width: 900px; font-size: 13.5px; font-family: system-ui, -apple-system, sans-serif; }
 th, td { padding: 9px 11px; border-bottom: 1px solid #d4e8f2; text-align: left; vertical-align: top; }
 th { background: #d6ebf5; font-size: 12px; color: #064466; white-space: nowrap; }
+.mini-bar, .mini-cap { display: none; }
 th:first-child, td:first-child { position: sticky; left: 0; z-index: 1; box-shadow: 1px 0 0 #b9d8e8; }
 th:first-child { background: #d6ebf5; }
 td:first-child { background: #f7fcfe; }
@@ -432,16 +436,37 @@ td:first-child { background: #f7fcfe; }
   .town .town-why, .town .town-crew, .town .town-note { display: none; }
   .town.open .town-why, .town.open .town-crew, .town.open .town-note { display: block; }
 
-  /* "Show the working" table: one card per town instead of a wide table */
+  /* "Show the working" table: one compact visual card per town */
   .table-wrap { border: 0; overflow: visible; }
   table { min-width: 0; display: block; font-size: 13px; }
   thead { display: none; }
   tbody { display: grid; gap: 8px; }
-  tr { display: block; background: #f5fbfe; border: 1.5px solid var(--line); border-radius: 11px; padding: 8px 11px; }
-  td, td:first-child { display: block; position: static; box-shadow: none; background: transparent; border: 0; padding: 4px 0; min-width: 0 !important; }
-  td::before { content: attr(data-label); display: block; font-size: 10.5px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
-  td:first-child { border-bottom: 1px solid #c8e1ee; padding-bottom: 6px; margin-bottom: 2px; font-size: 14.5px; }
-  td:first-child::before { display: none; }
+  tr {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3px 12px; align-items: start;
+    background: #f5fbfe; border: 1.5px solid var(--line); border-left: 5px solid var(--unk-bd);
+    border-radius: 11px; padding: 9px 11px;
+  }
+  td, td:first-child { display: block; position: static; box-shadow: none; background: transparent; border: 0; padding: 0; min-width: 0 !important; }
+  td::before { content: attr(data-label); display: block; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  td:nth-child(1) { order: 1; grid-column: 1; font-size: 15px; }
+  td:nth-child(1)::before { display: none; }
+  td:nth-child(7) { order: 2; grid-column: 2; justify-self: end; }
+  td:nth-child(7)::before { display: none; }
+  td:nth-child(4) { order: 3; grid-column: 1 / -1; margin-top: 4px; }
+  td:nth-child(2) { order: 4; }
+  td:nth-child(6) { order: 5; }
+  td:nth-child(3) { order: 6; grid-column: 1 / -1; }
+  td:nth-child(3) br { display: none; }
+  td:nth-child(5) { display: none; }
+  td:nth-child(8) { order: 8; grid-column: 1 / -1; margin-top: 3px; }
+  td:nth-child(9) { order: 9; grid-column: 1 / -1; font-size: 12.5px; color: #102e40; margin-top: 3px; }
+  td:nth-child(2), td:nth-child(3), td:nth-child(6), td:nth-child(8) { font-size: 12.5px; }
+  .mini-bar { display: block; position: relative; height: 10px; margin-top: 4px; background: #dcecf4; border-radius: 999px; overflow: visible; }
+  .mini-bar .mb-fill { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #38bdf8, #0369a1); }
+  .mini-bar .mb-Standby { background: linear-gradient(90deg, #fbbf24, #b45309); }
+  .mini-bar .mb-Barriers { background: linear-gradient(90deg, #f87171, #b91c1c); }
+  .mini-bar s { position: absolute; top: -3px; bottom: -3px; width: 2px; background: #b45309; text-decoration: none; }
+  .mini-cap { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted); margin-top: 3px; }
   details.fold summary { font-size: 14.5px; }
 
   /* AI = Messenger-style full-screen chat window, opened by the Ask AI button */
@@ -1219,6 +1244,15 @@ function renderDashboardCharts(towns) {
   }).join("");
 }
 
+function miniBar(t) {
+  const p99 = Number(t.p99_m3s) || 0, p95 = Number(t.p95_m3s) || 0;
+  const eff = t.effective_flow_m3s;
+  const pct = eff !== null && p99 ? Math.min(100, Math.max(2, eff / p99 * 100)) : 0;
+  const p95pct = p99 ? Math.min(100, p95 / p99 * 100) : 0;
+  return `<div class="mini-bar"><i class="mb-fill mb-${t.final_action}" style="width:${pct}%"></i><s style="left:${p95pct}%"></s></div>` +
+         `<div class="mini-cap"><span>p95 ${p95}</span><span>p99 ${p99}</span></div>`;
+}
+
 function renderPlan(ev) {
   const towns = ev.towns, cs = ev.crew_summary || {};
   const count = lv => towns.filter(t => t.final_action === lv).length;
@@ -1267,11 +1301,11 @@ function renderPlan(ev) {
     const eff = t.effective_flow_m3s !== null ? t.effective_flow_m3s.toFixed(2) + (t.flow_override_in_use !== null ? " (rehearsal)" : "") : "Unknown";
     const res = `${t.crew_status}. Sets ${t.barrier_sets}, pumps ${t.pumps}, sandbags ${t.sandbags.toLocaleString()}, staff ${t.staff_on_call}`;
     const why = [t.level_reason].concat(t.sheet_notes && t.sheet_notes.toLowerCase() !== "normal service" ? [`Sheet note: ${t.sheet_notes}`] : [], t.rule_notes).join(" ");
-    return `<tr>
+    return `<tr class="lv-${t.final_action}">
       <td data-label="Town"><b>${escapeHtml(t.town)}</b><br><span class="muted">${escapeHtml(t.counties_matched.join(" / "))}</span></td>
       <td data-label="River">${escapeHtml(t.river)}</td>
       <td data-label="Today / 3-day peak (m³/s)">${today}<br>${peak}</td>
-      <td data-label="Flow used (m³/s)"><b>${eff}</b></td>
+      <td data-label="Flow used (m³/s)"><b>${eff}</b>${miniBar(t)}</td>
       <td data-label="p95 / p99 (m³/s)">${t.p95_m3s} / ${t.p99_m3s}</td>
       <td data-label="Rain warning (48 h)">${escapeHtml(t.rain_warning_48h)}</td>
       <td data-label="Level"><span class="lvl lvl-${t.final_action}">${t.final_action}</span></td>
